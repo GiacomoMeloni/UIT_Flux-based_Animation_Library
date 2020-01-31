@@ -34,35 +34,12 @@ const animation = {
  * @returns animation object for the specific component
  * @throws TypeError if anim is not an object
  */
-function getAnimation (keyframes, index, animationType, anim) {
-  let _animReturn
+function getAnimation (animationType) {
+  const _animReturn = animation
 
-  if (keyframes !== null && keyframes === 'object' && !Array.isArray(keyframes)) {
-    /* Template to dispatch the keyframes for current animation
-    animationDispatcher.dispatch({
-      type: 'CHANGE_RULE',
-      index: index,
-      rule: keyframes
-    })
-    */
-  } else {
-    console.error('keyframes is null or is not an object')
-  }
-
-  if (anim === null) {
-    _animReturn = animation
-    _animReturn['-webkit-animation-name'] = animationType
-    _animReturn['animation-name'] = animationType
-    return _animReturn
-  } else if (!Array.isArray(anim) && typeof anim === 'object') {
-    _animReturn = animation
-    customProperties(_animReturn, anim)
-    _animReturn['-webkit-animation-name'] = animationType
-    _animReturn['animation-name'] = animationType
-    return _animReturn
-  } else {
-    throw new TypeError('component expects animation as an object')
-  }
+  _animReturn['-webkit-animation-name'] = animationType
+  _animReturn['animation-name'] = animationType
+  return _animReturn
 }
 
 function customProperties (_animReturn, anim) {
