@@ -3,7 +3,7 @@ import animationDispatcher from '../animationDispatcher'
 import bounce from './bounceObject'
 import bounceActionTypes from './bounceActionTypes'
 
-class Store extends ReduceStore {
+class BounceStore extends ReduceStore {
   constructor () {
     super(animationDispatcher)
   }
@@ -27,4 +27,4 @@ class Store extends ReduceStore {
   }
 }
 
-export default new Store()
+export default new BounceStore()
