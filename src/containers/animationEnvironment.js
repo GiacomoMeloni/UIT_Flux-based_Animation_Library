@@ -1,11 +1,12 @@
+import React from 'react'
 import { Container } from 'flux/utils'
 import bounceActions from '../data/bounce/bounceActions'
 import bounceStore from '../data/bounce/bounceStore'
 
 function getStores () {
   return [
-    bounceStore,
-    shakeStore
+    bounceStore//,
+    //shakeStore
   ]
 }
 
@@ -16,7 +17,12 @@ function getState () {
       changeValue: bounceActions.changeValue
     },
     shake: {
-      state: shakeStore.getState()
+      //state: shakeStore.getState()
     }
   }
+}
+
+export default function animationEnv (view) {
+  const Env = Container.createFunctional(view, getStores, getState)
+  return <Env/>
 }
