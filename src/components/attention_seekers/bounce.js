@@ -1,21 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import getAnimation from '../../data/animation'
 
-const bounce = ({ keyframes, anim, transformOrigin, ...rest }) => {
-  const animation = getAnimation('bounce', anim)
+function bounce ({ transformOrigin, ...rest }) {
+  const animation = getAnimation('bounce')
   if (transformOrigin !== null) {
-    animation['-webkit-transform-origin'] = transformOrigin
-    animation['transform-origin'] = transformOrigin
+    animation.WebkitTransformOrigin = transformOrigin
+    animation.transfromOrigin = transformOrigin
   } else {
-    animation['-webkit-transform-origin'] = 'center bottom'
-    animation['transform-origin'] = 'center bottom'
+    animation.WebkitTransformOrigin = 'center bottom'
+    animation.transformOrigin = 'center bottom'
   }
+  console.log(animation)
+
+  // test
+  animation.animationIterationCount = 'infinite'
 
   return (
-    <Component style={animation}>
+    <div style={animation}>
       { rest.children }
-    </Component>
+    </div>
   )
 }
 

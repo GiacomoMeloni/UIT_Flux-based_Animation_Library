@@ -1,20 +1,20 @@
 import animationDispatcher from './animationDispatcher'
 
 const animation = {
-  '-webkit-animation-duration': '1s',
-  'animation-duration': '1s',
-  '-webkit-animation-timing-function': 'ease',
-  'animation-timing-function': 'ease',
-  '-webkit-animation-delay': '0s',
-  'animation-delay': '0s',
-  '-webkit-animation-iteration-count': '1',
-  'animation-iteration-count': '1',
-  '-webkit-animation-direction': 'normal',
-  'animation-direction': 'normal',
-  '-webkit-animation-fill-mode': 'both',
-  'animation-fill-mode': 'both',
-  '-webkit-animation-play-state': 'running',
-  'animation-play-state': 'running'
+  WebkitAnimationDuration: '1s',
+  animationDuration: '1s',
+  WebkitAnimationTimingFunction: 'ease',
+  animationTimingFunction: 'ease',
+  WebkitAnimationDelay: '0s',
+  animationDelay: '0s',
+  WebkitAnimationIterationCount: '1',
+  animationIterationCount: '1',
+  WebkitAnimationDirection: 'normal',
+  animationDirection: 'normal',
+  WebkitAnimationFillMode: 'both',
+  animationFillMode: 'both',
+  WebkitAnimationPlayState: 'running',
+  animationPlayState: 'running'
 }
 
 // TODO: Create function to change keyframes depending on keyframes parameter
@@ -24,12 +24,12 @@ const animation = {
  * @param animationType
  * @param anim: object with default values: {
  *   duration: 1s,
- *   'timing-func': 1s,
+ *   'timing': ease,
  *   delay: 0s,
  *   iterations: 1,
  *   direction: normal,
- *   'fill-mode': both,
- *   'play-state': running
+ *   'fillMode': both,
+ *   'playState': running
  * }
  * @returns animation object for the specific component
  * @throws TypeError if anim is not an object
@@ -37,45 +37,45 @@ const animation = {
 function getAnimation (animationType) {
   const _animReturn = animation
 
-  _animReturn['-webkit-animation-name'] = animationType
-  _animReturn['animation-name'] = animationType
+  _animReturn.WebkitAnimationName = animationType
+  _animReturn.animationName = animationType
   return _animReturn
 }
 
 function customProperties (_animReturn, anim) {
   if (anim.prototype.hasOwnProperty.call(anim, 'duration')) {
-    _animReturn['-webkit-animation-duration'] = anim.duration
-    _animReturn['animation-duration'] = anim.duration
+    _animReturn.WebkitAnimationDuration = anim.duration
+    _animReturn.animationDuration = anim.duration
   }
 
-  if (anim.prototype.hasOwnProperty.call(anim, 'timing-func')) {
-    _animReturn['-webkit-animation-timing-function'] = anim['timing-func']
-    _animReturn['animation-timing-function'] = anim['timing-func']
+  if (anim.prototype.hasOwnProperty.call(anim, 'timing')) {
+    _animReturn.WebkitAnimationTimingFunction = anim.timing
+    _animReturn.animationTimingFunction = anim.timing
   }
 
   if (anim.prototype.hasOwnProperty.call(anim, 'delay')) {
-    _animReturn['-webkit-animation-delay'] = anim.delay
-    _animReturn['animation-delay'] = anim.delay
+    _animReturn.WebkitAnimationDelay = anim.delay
+    _animReturn.animationDelay = anim.delay
   }
 
   if (anim.prototype.hasOwnProperty.call(anim, 'iterations')) {
-    _animReturn['-webkit-animation-iteration-count'] = anim.iterations
-    _animReturn['animation-iteration-count'] = anim.iterations
+    _animReturn.WebkitAnimationIterationCount = anim.iterations
+    _animReturn.animationIterationCount = anim.iterations
   }
 
   if (anim.prototype.hasOwnProperty.call(anim, 'direction')) {
-    _animReturn['-webkit-animation-direction'] = anim.direction
-    _animReturn['animation-direction'] = anim.direction
+    _animReturn.WebkitAnimationDirection = anim.direction
+    _animReturn.animationDirection = anim.direction
   }
 
-  if (anim.prototype.hasOwnProperty.call(anim, 'fill-mode')) {
-    _animReturn['-webkit-animation-fill-mode'] = anim['fill-mode']
-    _animReturn['animation-fill-mode'] = anim['fill-mode']
+  if (anim.prototype.hasOwnProperty.call(anim, 'fillMode')) {
+    _animReturn.WebkitAnimationFillMode = anim.fillMode
+    _animReturn.animationFillMode = anim.fillMode
   }
 
-  if (anim.prototype.hasOwnProperty.call(anim, 'play-state')) {
-    _animReturn['-webkit-animation-play-state'] = anim['play-state']
-    _animReturn['animation-play-state'] = anim['play-state']
+  if (anim.prototype.hasOwnProperty.call(anim, 'playState')) {
+    _animReturn.WebkitAnimationPlayState = anim.playState
+    _animReturn.animationPlayState = anim.playState
   }
 }
 
