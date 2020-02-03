@@ -30,7 +30,7 @@ function bounceKeyframes (bounces, topLimit) {
   const frames = bounces * 2
   const linspace = Math.floor(100 / frames)
   // if topLimit not null or zero
-  if (topLimit) {
+  if (!topLimit) {
     topLimit = bounces * 10
   }
 
