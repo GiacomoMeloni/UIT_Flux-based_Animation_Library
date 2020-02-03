@@ -2,11 +2,14 @@ import React from 'react'
 import { Container } from 'flux/utils'
 import bounceActions from '../data/bounce/bounceActions'
 import bounceStore from '../data/bounce/bounceStore'
+import fadeStore from '../data/fade/fadeStore'
+import fadeActions from '../data/fade/fadeActions'
 
 function getStores () {
   return [
-    bounceStore//,
-    //shakeStore
+    bounceStore,
+    fadeStore//,
+    // shakeStore
   ]
 }
 
@@ -16,8 +19,10 @@ function getState () {
       state: bounceStore.getState(),
       changeValue: bounceActions.changeValue
     },
-    shake: {
-      //state: shakeStore.getState()
+    fade: {
+      state: fadeStore.getState(),
+      changeEntry: fadeActions.changeEntry
+      // state: shakeStore.getState()
     }
   }
 }
