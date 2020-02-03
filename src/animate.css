@@ -74,13 +74,6 @@
     }
 }
 
-.bounce {
-    -webkit-animation-name: bounce;
-    animation-name: bounce;
-    -webkit-transform-origin: center bottom;
-    transform-origin: center bottom;
-}
-
 @-webkit-keyframes flash {
     from,
     50%,
@@ -105,11 +98,6 @@
     75% {
         opacity: 0;
     }
-}
-
-.flash {
-    -webkit-animation-name: flash;
-    animation-name: flash;
 }
 
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
