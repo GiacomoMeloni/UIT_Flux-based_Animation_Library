@@ -3,12 +3,18 @@ import getAnimation from '../../data/animation'
 import React from 'react'
 
 const fade = ({ anim, entry, direction, duration, opacityLimit, ...rest }) => {
-  const animation = getAnimation('fade', anim)
+  const animation = getAnimation('fadeIn', anim)
 
   console.log(fadeKeyframe(entry, direction, duration, opacityLimit))
 
   function fadeKeyframe (entry, direction, duration, opacityLimit) {
-    const opacity = (opacityLimit / 10).toString()
+    let opacity
+    if (opacityLimit) {
+      opacity = (opacityLimit / 10).toString()
+    } else {
+      opacity = 1
+    }
+
     let originFrame
     let endFrame
 
@@ -17,9 +23,9 @@ const fade = ({ anim, entry, direction, duration, opacityLimit, ...rest }) => {
 
     if (entry === true) {
       originFrame += 'opacity: 0;\n'
-      endFrame += 'opacity: ' + { opacity } + ';\n'
+      endFrame += 'opacity: ' + opacity + ';\n'
     } else {
-      originFrame += 'opacity: ' + { opacity } + ';\n'
+      originFrame += 'opacity: ' + opacity + ';\n'
       endFrame += 'opacity: 0;\n'
     }
 
@@ -27,30 +33,33 @@ const fade = ({ anim, entry, direction, duration, opacityLimit, ...rest }) => {
       case 'down':
         originFrame += 'transform: translate3d(0, -100%, 0);\n' +
           '-webkit-transform: translate3d(0, -100%, 0);\n'
-        endFrame += 'transform: translate3d(0, 0, 0); +\n' +
-          '          \'-webkit-transform: translate3d(0, 0, 0);\\n'
+        endFrame += 'transform: translate3d(0, 0, 0);\n' +
+          '-webkit-transform: translate3d(0, 0, 0);\n'
         break
       case 'up':
-        originFrame += 'transform: translate3d(0, 100%, 0); +\n' +
-          '          \'-webkit-transform: translate3d(0, 100%, 0);\\n'
-        endFrame += 'transform: translate3d(0, 0, 0); +\n' +
-          '          \'-webkit-transform: translate3d(0, 0, 0);\\n'
+        originFrame += 'transform: translate3d(0, 100%, 0);\n' +
+          '-webkit-transform: translate3d(0, 100%, 0);\n'
+        endFrame += 'transform: translate3d(0, 0, 0);\n' +
+          '-webkit-transform: translate3d(0, 0, 0);\n'
         break
       case 'left':
-        originFrame += 'transform: translate3d(-100%, 0, 0); +\n' +
-          '          \'-webkit-transform: translate3d(-100%, 0, 0);\\n'
-        endFrame += 'transform: translate3d(0, 0, 0); +\n' +
-          '          \'-webkit-transform: translate3d(0, 0, 0);\\n'
+        originFrame += 'transform: translate3d(-100%, 0, 0);\n' +
+          '-webkit-transform: translate3d(-100%, 0, 0);\n'
+        endFrame += 'transform: translate3d(0, 0, 0);\n' +
+          '-webkit-transform: translate3d(0, 0, 0);\n'
         break
       case 'right':
-        originFrame += 'transform: translate3d(100%, 0, 0); +\n' +
-          '          \'-webkit-transform: translate3d(100%, 0, 0);\\n'
-        endFrame += 'transform: translate3d(0, 0, 0); +\n' +
-          '          \'-webkit-transform: translate3d(0, 0, 0);\\n'
+        originFrame += 'transform: translate3d(100%, 0, 0);\n' +
+          '-webkit-transform: translate3d(100%, 0, 0);\n'
+        endFrame += 'transform: translate3d(0, 0, 0);\n' +
+          '-webkit-transform: translate3d(0, 0, 0);\n'
         break
       default:
         break
     }
+
+    originFrame += '}\n'
+    endFrame += '}\n\n'
 
     return originFrame + endFrame
   }

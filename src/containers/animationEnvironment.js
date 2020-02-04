@@ -4,6 +4,7 @@ import bounceActions from '../data/bounce/bounceActions'
 import bounceStore from '../data/bounce/bounceStore'
 import fadeStore from '../data/fade/fadeStore'
 import fadeActions from '../data/fade/fadeActions'
+import '../animate.css'
 
 function getStores () {
   return [
@@ -21,7 +22,8 @@ function getState () {
     },
     fade: {
       state: fadeStore.getState(),
-      changeEntry: fadeActions.changeEntry
+      changeEntry: fadeActions.changeEntry,
+      changeDirection: fadeActions.changeDirection
     }
   }
 }
