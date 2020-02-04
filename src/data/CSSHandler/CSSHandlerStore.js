@@ -1,7 +1,8 @@
 import { ReduceStore } from 'flux/utils'
 import animationDispatcher from '../animationDispatcher'
-import CSSHanlderObject from './CSSHandlerObject'
+import CSSHandlerObject from './CSSHandlerObject'
 import Immutable from 'immutable'
+import CSSHandlerActionTypes from './CSSHandlerActionTypes'
 
 class CSSHandlerStore extends ReduceStore {
   constructor () {
@@ -10,18 +11,20 @@ class CSSHandlerStore extends ReduceStore {
 
   getInitialState () {
     for (const styleSheet in document.styleSheets) {
-      if (styleSheet.title === 'animate.css') {
-        return CSSHanlderObject({
+      if (styleSheet.rules[0].name === 'bounce') {
+        return CSSHandlerObject({
           sheet: styleSheet,
           rules: Immutable.OrderedMap()
         })
       }
     }
-    return
   }
 
   reduce (state, action) {
     switch (action.type) {
+      case CSSHandlerActionTypes.INSERT_RULE:
+        state.sheet.insertRule(action.keyframes, state.rules.get(action.animation))
+        return state
 
       default:
         return state
