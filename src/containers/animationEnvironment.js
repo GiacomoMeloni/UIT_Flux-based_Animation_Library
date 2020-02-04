@@ -22,7 +22,6 @@ function getState () {
     fade: {
       state: fadeStore.getState(),
       changeEntry: fadeActions.changeEntry
-      // state: shakeStore.getState()
     }
   }
 }
