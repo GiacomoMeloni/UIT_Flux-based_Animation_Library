@@ -1,5 +1,3 @@
-import animationDispatcher from './animationDispatcher'
-
 const animation = {
   WebkitAnimationDuration: '1s',
   animationDuration: '1s',
@@ -19,27 +17,15 @@ const animation = {
 
 // TODO: Create function to change keyframes depending on keyframes parameter
 /**
- * @param keyframes: keyframes passed as an object
- * @param index: index of keyframes rule of current animation in the CSS
  * @param animationType
- * @param anim: object with default values: {
- *   duration: 1s,
- *   'timing': ease,
- *   delay: 0s,
- *   iterations: 1,
- *   direction: normal,
- *   'fillMode': both,
- *   'playState': running
- * }
  * @returns animation object for the specific component
- * @throws TypeError if anim is not an object
  */
 function getAnimation (animationType) {
-  const _animReturn = animation
-
-  _animReturn.WebkitAnimationName = animationType
-  _animReturn.animationName = animationType
-  return _animReturn
+  return {
+    ...animation,
+    WebkitAnimationName: animationType,
+    animationName: animationType
+  }
 }
 
 function customProperties (_animReturn, anim) {

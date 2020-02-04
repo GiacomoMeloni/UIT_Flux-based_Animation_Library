@@ -15,6 +15,9 @@ function App (props) {
             { props.bounce.state.bounces }
           </p>
         </uit.bounce>
+        <uit.bounce {...props}>
+          Ciao sono gustavo
+        </uit.bounce>
         <a
           className="App-link"
           href="https://reactjs.org"
