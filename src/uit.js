@@ -8,7 +8,7 @@ const uit = {
 }
 
 export function getBounce (id) {
-  return getAnimData('bounce', id, bounceActions.newSimpleBounce)
+  return getAnimData('bounce', id, bounceActions.newSimpleBounce, bounceObject)
 }
 
 export function getFade (id) {
@@ -23,13 +23,13 @@ export function getTada (id) {
   return getAnimData('tada', id)
 }
 
-function getAnimData (type, id, creater) {
+function getAnimData (type, id, creater, returner) {
   const state = stateByType(type)
   if (state.has(id)) {
     return state.get(id)
   } else {
     creater(id)
-    return bounceObject({ id: id })
+    return returner({ id: id })
   }
 }
 
