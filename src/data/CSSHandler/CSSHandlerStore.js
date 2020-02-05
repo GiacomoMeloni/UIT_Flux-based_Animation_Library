@@ -11,7 +11,7 @@ class CSSHandlerStore extends ReduceStore {
 
   getInitialState () {
     for (const styleSheet in document.styleSheets) {
-      if (styleSheet.rules[0].name === 'bounce') {
+      if (styleSheet.rules[0].name === 'uit_animation_library') {
         return CSSHandlerObject({
           sheet: styleSheet,
           rules: Immutable.OrderedMap()
@@ -23,7 +23,7 @@ class CSSHandlerStore extends ReduceStore {
   reduce (state, action) {
     switch (action.type) {
       case CSSHandlerActionTypes.INSERT_RULE:
-        state.sheet.insertRule(action.keyframes, state.rules.get(action.animation))
+        state.sheet.insertRule(action.rule, action.index)
         return state
 
       default:
