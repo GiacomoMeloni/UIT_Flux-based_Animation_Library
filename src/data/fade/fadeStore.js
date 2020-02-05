@@ -2,6 +2,7 @@ import { ReduceStore } from 'flux/utils'
 import animationDispatcher from '../animationDispatcher'
 import fade from './fadeObject'
 import fadeActionTypes from './fadeActionTypes'
+import Immutable from 'immutable'
 
 class FadeStore extends ReduceStore {
   constructor () {
@@ -9,11 +10,26 @@ class FadeStore extends ReduceStore {
   }
 
   getInitialState () {
-    return fade()
+    return Immutable.OrderedMap()
   }
 
   reduce (state, action) {
     switch (action.type) {
+      case fadeActionTypes.NEW_FADE:
+        return state.set(
+          action.id,
+          fade({
+            id: action.id,
+            isSet: true,
+            direction: action.direction,
+            duration: action.duration,
+            opacityLimit: action.opacityLimit
+          })
+        )
+
+      case fadeActionTypes.NEW_SIMPLE_FADE:
+        return state.set(action.id, fade({ id: action.id }))
+
       case fadeActionTypes.CHANGE_ENTRY:
         if (state.has(action.key)) {
           return state.set(action.key, action.entry)

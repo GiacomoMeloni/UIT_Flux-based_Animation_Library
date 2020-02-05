@@ -2,6 +2,22 @@ import animationDispatcher from '../animationDispatcher'
 import fadeActionTypes from './fadeActionTypes'
 
 const fadeActions = {
+  newSimpleFade (id) {
+    animationDispatcher.dispatch({
+      type: fadeActionTypes.NEW_SIMPLE_FADE,
+      id: id
+    })
+  },
+  newFade (id, entry, direction, duration, opacityLimit) {
+    animationDispatcher.dispatch({
+      type: fadeActionTypes.NEW_FADE,
+      id: id,
+      entry: entry,
+      direction: direction,
+      duration: duration,
+      opacityLimit: opacityLimit
+    })
+  },
   changeEntry (key, entry) {
     animationDispatcher.dispatch({
       type: fadeActionTypes.CHANGE_ENTRY,

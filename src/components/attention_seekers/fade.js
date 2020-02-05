@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types'
 import getAnimation from '../../data/animation'
 import React from 'react'
+import fadeActions from '../../data/fade/fadeActions'
 
-const fade = ({ anim, entry, direction, duration, opacityLimit, ...rest }) => {
+const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) => {
   const animation = getAnimation('fadeIn', anim)
+
+  fadeActions.newFade(id, entry, direction, duration, opacityLimit)
 
   console.log(fadeKeyframe(entry, direction, duration, opacityLimit))
 
   function fadeKeyframe (entry, direction, duration, opacityLimit) {
+    // const fadeAnimation = fadeActions.getFade(id)
+
     let opacity
     if (opacityLimit) {
       opacity = (opacityLimit / 10).toString()
@@ -73,6 +78,7 @@ const fade = ({ anim, entry, direction, duration, opacityLimit, ...rest }) => {
 
 fade.propTypes = {
   anim: PropTypes.object,
+  id: PropTypes.string,
   entry: PropTypes.bool,
   direction: PropTypes.string,
   duration: PropTypes.string,
