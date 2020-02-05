@@ -1,17 +1,23 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
+import uit from './uit'
 
 function App (props) {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p onClick={ () => props.bounce.changeValue('bounces', 4) }>
-          Edit <code>src/App.js</code> and save to reload.
-          <br/>
-          { props.bounce.state.bounces }
-        </p>
+        <uit.fade entry {...props}>
+          <p onClick={ () => props.fade.changeDirection('direction', 'down') }>
+            Edit <code>src/App.js</code> and save to reload.
+            <br/>
+            { props.fade.state.direction }
+          </p>
+        </uit.fade>
+        <uit.fade {...props}>
+          { props.fade.state.direction }
+        </uit.fade>
         <a
           className="App-link"
           href="https://reactjs.org"
