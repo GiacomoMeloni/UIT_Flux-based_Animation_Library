@@ -2,11 +2,14 @@ import PropTypes from 'prop-types'
 import getAnimation from '../../data/animation'
 import React from 'react'
 import fadeActions from '../../data/fade/fadeActions'
+import Actions from '../../data/CSSHandler/CSSHandlerActions'
 
 const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) => {
   const animation = getAnimation('fadeIn', anim)
 
   fadeActions.newFade(id, entry, direction, duration, opacityLimit)
+  console.log(document.styleSheets)
+  //Actions.insertRule(fadeKeyframe(entry, direction, duration, opacityLimit), 0)
 
   console.log(fadeKeyframe(entry, direction, duration, opacityLimit))
 
@@ -23,7 +26,7 @@ const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) =
     let originFrame
     let endFrame
 
-    originFrame = 'from {\n'
+    originFrame = '@keyframe fade' + id + ' {\nfrom {\n'
     endFrame = 'to {\n'
 
     if (entry === true) {
