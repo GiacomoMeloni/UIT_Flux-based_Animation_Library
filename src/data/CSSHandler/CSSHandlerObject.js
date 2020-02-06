@@ -1,8 +1,13 @@
 import Immutable from 'immutable'
 
-const animationSheet = Immutable.Record({
-  sheet: CSSStyleSheet(),
+const CSSHandlerObject = Immutable.Record({
+  sheet: null,
   rules: Immutable.OrderedMap()
 })
 
-export default animationSheet
+const rule = Immutable.Record({
+  index: -1,
+  rule: ''
+})
+
+export { CSSHandlerObject, rule }
