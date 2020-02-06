@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import getAnimation from '../../data/animation'
+import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
-function bounce ({ transformOrigin, bounces, topLimit, ...rest }) {
+function bounce ({ id, transformOrigin, bounces, topLimit, ...rest }) {
   const animation = getAnimation('bounce')
   if (transformOrigin !== null) {
     animation.WebkitTransformOrigin = transformOrigin
@@ -11,15 +12,15 @@ function bounce ({ transformOrigin, bounces, topLimit, ...rest }) {
     animation.WebkitTransformOrigin = 'center bottom'
     animation.transformOrigin = 'center bottom'
   }
-  console.log(animation)
+  // console.log(animation)
 
   // test
   animation.animationIterationCount = 'infinite'
-
-  console.log(bounceKeyframes(3, 30))
+  const rule = '@keyframes ' + id + ' {\n' + bounceKeyframes(7, null) + '\n}'
+  CSSHandlerActions.insertRule(rule, id)
 
   return (
-    <div style={animation}>
+    <div id={id} style={animation}>
       { rest.children }
     </div>
   )
@@ -76,6 +77,7 @@ function bounceKeyframes (bounces, topLimit) {
 }
 
 bounce.propTypes = {
+  id: PropTypes.string,
   anim: PropTypes.object,
   transformOrigin: PropTypes.string,
   bounces: PropTypes.number,
