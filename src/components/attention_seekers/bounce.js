@@ -4,7 +4,7 @@ import getAnimation from '../../data/animation'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
 function bounce ({ id, transformOrigin, bounces, topLimit, ...rest }) {
-  const animation = getAnimation('bounce')
+  const animation = getAnimation(id)
   if (transformOrigin !== null) {
     animation.WebkitTransformOrigin = transformOrigin
     animation.transfromOrigin = transformOrigin
@@ -12,11 +12,10 @@ function bounce ({ id, transformOrigin, bounces, topLimit, ...rest }) {
     animation.WebkitTransformOrigin = 'center bottom'
     animation.transformOrigin = 'center bottom'
   }
-  // console.log(animation)
 
   // test
   animation.animationIterationCount = 'infinite'
-  const rule = '@keyframes ' + id + ' {\n' + bounceKeyframes(7, null) + '\n}'
+  const rule = '@keyframes ' + id + ' {\n' + bounceKeyframes(bounces, null) + '\n}'
   CSSHandlerActions.insertRule(rule, id)
 
   return (
@@ -80,7 +79,7 @@ bounce.propTypes = {
   id: PropTypes.string,
   anim: PropTypes.object,
   transformOrigin: PropTypes.string,
-  bounces: PropTypes.number,
+  bounces: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   topLimit: PropTypes.number
 }
 
