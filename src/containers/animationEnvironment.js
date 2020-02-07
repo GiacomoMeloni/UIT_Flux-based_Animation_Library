@@ -6,7 +6,7 @@ import fadeStore from '../data/fade/fadeStore'
 import fadeActions from '../data/fade/fadeActions'
 import CSSHandlerActions from '../data/CSSHandler/CSSHandlerActions'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
-import '../animate.css'
+// import '../animate.css'
 import '../test.css'
 
 function getStores () {

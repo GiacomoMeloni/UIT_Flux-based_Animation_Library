@@ -2,21 +2,24 @@ import PropTypes from 'prop-types'
 import getAnimation from '../../data/animation'
 import React from 'react'
 import fadeActions from '../../data/fade/fadeActions'
+import fadeStore from '../../data/fade/fadeStore'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
 const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) => {
   const animation = getAnimation('fadeIn', anim)
 
-  if (rest.fade.state.has(id)) {
+  if (rest.fade.state.has(id) && rest.fade.state.get(id)) {
     const state = rest.fade.state.get(id)
     console.log(rest.fade.state.get(id).get('direction'))
     if (state) {
       console.log(fadeKeyframe(state))
-      CSSHandlerActions.insertRule(fadeKeyframe(state), id)
+      // CSSHandlerActions.insertRule(fadeKeyframe(state), id)
     }
   } else {
     fadeActions.newFade(id, entry, direction, duration, opacityLimit)
   }
+
+  console.log(fadeStore.getState())
 
   function fadeKeyframe (state) {
     let opacity
@@ -89,8 +92,8 @@ fade.propTypes = {
   id: PropTypes.string,
   entry: PropTypes.bool,
   direction: PropTypes.string,
-  duration: PropTypes.number,
-  opacityLimit: PropTypes.number
+  duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  opacityLimit: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 
 export default fade

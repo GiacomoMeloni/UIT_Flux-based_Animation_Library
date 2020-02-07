@@ -40,7 +40,7 @@ class FadeStore extends ReduceStore {
 
       case fadeActionTypes.CHANGE_DIRECTION:
         if (state.has(action.id)) {
-          return state.set(action.id).set(action.key, action.direction)
+          return state.setIn([action.id, action.key], action.duration)
         } else {
           throw Error('fade does not have a property ' + action.key)
         }
