@@ -2,29 +2,22 @@ import PropTypes from 'prop-types'
 import getAnimation from '../../data/animation'
 import React from 'react'
 import fadeActions from '../../data/fade/fadeActions'
-import fadeStore from '../../data/fade/fadeStore'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
-const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) => {
-  const animation = getAnimation('fadeIn', anim)
-
-  if (rest.fade.state.has(id) && rest.fade.state.get(id)) {
-    const state = rest.fade.state.get(id)
-    console.log(rest.fade.state.get(id).get('direction'))
-    if (state) {
-      console.log(fadeKeyframe(state))
-      // CSSHandlerActions.insertRule(fadeKeyframe(state), id)
-    }
-  } else {
+const fade = ({ id, entry, direction, duration, opacityLimit, ...rest }) => {
+  const animation = getAnimation(id)
+  animation.animationIterationCount = 'infinite'
+  if (!rest.fade.state.has(id)) {
     fadeActions.newFade(id, entry, direction, duration, opacityLimit)
+  } else {
+    console.log(rest.fade.state.get(id).get('direction'))
   }
+  CSSHandlerActions.insertRule(fadeKeyframe(id, entry, direction, duration, opacityLimit), id)
 
-  console.log(fadeStore.getState())
-
-  function fadeKeyframe (state) {
+  function fadeKeyframe (id, entry, direction, duration, opacityLimit) {
     let opacity
-    if (state.get('opacityLimit')) {
-      opacity = (state.get('opacityLimit') / 100).toString()
+    if (opacityLimit) {
+      opacity = (opacityLimit / 100).toString()
     } else {
       opacity = 1
     }
@@ -32,10 +25,10 @@ const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) =
     let originFrame
     let endFrame
 
-    originFrame = '@keyframes fade' + state.get('id') + ' {\nfrom {\n'
+    originFrame = '@keyframes ' + id + ' {\nfrom {\n'
     endFrame = 'to {\n'
 
-    if (state.get('entry') === true) {
+    if (entry === true) {
       originFrame += 'opacity: 0;\n'
       endFrame += 'opacity: ' + opacity + ';\n'
     } else {
@@ -43,7 +36,7 @@ const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) =
       endFrame += 'opacity: 0;\n'
     }
 
-    switch (state.get('direction')) {
+    switch (direction) {
       case 'down':
         originFrame += 'transform: translate3d(0, -100%, 0);\n' +
           '-webkit-transform: translate3d(0, -100%, 0);\n'
@@ -57,14 +50,12 @@ const fade = ({ anim, id, entry, direction, duration, opacityLimit, ...rest }) =
           '-webkit-transform: translate3d(0, 0, 0);\n'
         break
       case 'left':
-        console.log('ci sono')
         originFrame += 'transform: translate3d(-100%, 0, 0);\n' +
           '-webkit-transform: translate3d(-100%, 0, 0);\n'
         endFrame += 'transform: translate3d(0, 0, 0);\n' +
           '-webkit-transform: translate3d(0, 0, 0);\n'
         break
       case 'right':
-        console.log('ci sono')
         originFrame += 'transform: translate3d(100%, 0, 0);\n' +
           '-webkit-transform: translate3d(100%, 0, 0);\n'
         endFrame += 'transform: translate3d(0, 0, 0);\n' +

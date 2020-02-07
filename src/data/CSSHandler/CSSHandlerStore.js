@@ -32,7 +32,6 @@ class CSSHandlerStore extends ReduceStore {
         }
 
         if (state.rules.has(action.id)) {
-          console.log(state.rules.get(action.id))
           index = state.rules.get(action.id).index
           state.sheet.insertRule(action.rule, index)
 
