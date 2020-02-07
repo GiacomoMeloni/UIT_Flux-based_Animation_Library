@@ -1,15 +1,16 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import uit from './uit'
+import uit, { getFade } from './uit'
+import fadeActions from "./data/fade/fadeActions";
 
 function App (props) {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.fade id={'scheggia'} entry {...props}>
-          <p onClick={ () => props.fade.changeDirection('direction', 'down') }>
+        <uit.fade id="fade01" direction="right" duration={2} entry={ false } {...props}>
+          <p onClick={ () => fadeActions.changeDirection('fade01', 'direction', 'down') }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
             { props.fade.state.direction }

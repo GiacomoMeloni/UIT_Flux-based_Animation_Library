@@ -35,11 +35,11 @@ const animation = {
  * @throws TypeError if anim is not an object
  */
 function getAnimation (animationType) {
-  const _animReturn = animation
-
-  _animReturn.WebkitAnimationName = animationType
-  _animReturn.animationName = animationType
-  return _animReturn
+  return {
+    ...animation,
+    WebkitAnimationName: animationType,
+    animationName: animationType
+  }
 }
 
 // function customProperties (_animReturn, anim) {

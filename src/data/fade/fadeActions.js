@@ -25,9 +25,10 @@ const fadeActions = {
       entry: entry
     })
   },
-  changeDirection (key, direction) {
+  changeDirection (id, key, direction) {
     animationDispatcher.dispatch({
       type: fadeActionTypes.CHANGE_DIRECTION,
+      id: id,
       key: key,
       direction: direction
     })

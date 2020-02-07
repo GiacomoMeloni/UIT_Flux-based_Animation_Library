@@ -21,6 +21,7 @@ class FadeStore extends ReduceStore {
           fade({
             id: action.id,
             isSet: true,
+            entry: action.entry,
             direction: action.direction,
             duration: action.duration,
             opacityLimit: action.opacityLimit
@@ -38,8 +39,8 @@ class FadeStore extends ReduceStore {
         }
 
       case fadeActionTypes.CHANGE_DIRECTION:
-        if (state.has(action.key)) {
-          return state.set(action.key, action.direction)
+        if (state.has(action.id)) {
+          return state.set(action.id).set(action.key, action.direction)
         } else {
           throw Error('fade does not have a property ' + action.key)
         }

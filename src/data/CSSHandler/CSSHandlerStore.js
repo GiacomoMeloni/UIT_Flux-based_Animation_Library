@@ -17,7 +17,7 @@ class CSSHandlerStore extends ReduceStore {
       case CSSHandlerActionTypes.INSERT_RULE: {
         let index
         // Called only if state.sheet is not defined yet
-        if ('sheet' in action) {
+        if (action.sheet) {
           index = action.sheet.rules.length
           action.sheet.insertRule(action.rule, index)
           return state.set('sheet', action.sheet).set('rules', state.rules.set(

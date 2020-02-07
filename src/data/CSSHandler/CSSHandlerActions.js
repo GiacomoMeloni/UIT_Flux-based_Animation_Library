@@ -14,7 +14,7 @@ function sheetReady (rule, id) {
     if (document.readyState === 'complete') {
       documentLoaded = true
       for (const styleSheet of document.styleSheets) {
-        if (styleSheet.rules[0].name === 'uit_animation_library') {
+        if (styleSheet.cssRules[0].name === 'uit_animation_library') {
           animationDispatcher.dispatch({
             type: CSSHandlerActionTypes.INSERT_RULE,
             sheet: styleSheet,
