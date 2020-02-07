@@ -3,7 +3,7 @@ import { Container } from 'flux/utils'
 import bounceActions from '../data/bounce/bounceActions'
 import bounceStore from '../data/bounce/bounceStore'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
-import '../animate.css'
+// import '../animate.css'
 import '../test.css'
 
 function getStores () {
