@@ -6,18 +6,21 @@ import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
 const fade = ({ id, entry, direction, duration, opacityLimit, ...rest }) => {
   const animation = getAnimation(id)
-  animation.animationIterationCount = 'infinite'
+
   if (!rest.fade.state.has(id)) {
     fadeActions.newFade(id, entry, direction, duration, opacityLimit)
-  } else {
-    console.log(rest.fade.state.get(id).get('direction'))
   }
-  CSSHandlerActions.insertRule(fadeKeyframe(id, entry, direction, duration, opacityLimit), id)
 
-  function fadeKeyframe (id, entry, direction, duration, opacityLimit) {
+  const state = rest.fade.state.get(id)
+
+  if (state) {
+    CSSHandlerActions.insertRule(fadeKeyframe(state), id)
+  }
+
+  function fadeKeyframe (state) {
     let opacity
-    if (opacityLimit) {
-      opacity = (opacityLimit / 100).toString()
+    if (state.get('opacityLimit')) {
+      opacity = (state.get('opacityLimit') / 100).toString()
     } else {
       opacity = 1
     }
@@ -25,10 +28,10 @@ const fade = ({ id, entry, direction, duration, opacityLimit, ...rest }) => {
     let originFrame
     let endFrame
 
-    originFrame = '@keyframes ' + id + ' {\nfrom {\n'
+    originFrame = '@keyframes ' + state.get('id') + ' {\nfrom {\n'
     endFrame = 'to {\n'
 
-    if (entry === true) {
+    if (state.get('entry') === true) {
       originFrame += 'opacity: 0;\n'
       endFrame += 'opacity: ' + opacity + ';\n'
     } else {
@@ -36,7 +39,7 @@ const fade = ({ id, entry, direction, duration, opacityLimit, ...rest }) => {
       endFrame += 'opacity: 0;\n'
     }
 
-    switch (direction) {
+    switch (state.get('direction')) {
       case 'down':
         originFrame += 'transform: translate3d(0, -100%, 0);\n' +
           '-webkit-transform: translate3d(0, -100%, 0);\n'

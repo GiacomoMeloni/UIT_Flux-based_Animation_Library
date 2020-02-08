@@ -9,7 +9,7 @@ function App (props) {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <uit.fade id="fade01" direction="right" duration={2} entry={ false } {...props}>
-          <p onClick={ () => props.fade.changeDirection('fade01', 'direction', 'down') }>
+          <p onClick={ () => props.fade.changeDirection('fade01', 'entry', true) }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
             { props.fade.state.direction }

@@ -21,7 +21,6 @@ class CSSHandlerStore extends ReduceStore {
         if ('sheet' in action) {
           index = action.sheet.cssRules.length
           action.sheet.insertRule(action.rule, index)
-
           return state.set('sheet', action.sheet).set('rules', state.rules.set(
             action.id,
             rule({
@@ -34,7 +33,6 @@ class CSSHandlerStore extends ReduceStore {
         if (state.rules.has(action.id)) {
           index = state.rules.get(action.id).index
           state.sheet.insertRule(action.rule, index)
-
           return state.setIn(['rules', action.id, 'rule'], action.rule)
         } else {
           index = state.sheet.cssRules.length

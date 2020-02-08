@@ -13,11 +13,11 @@ const uit = {
 }
 
 export function getBounce (id) {
-  return getAnimData('bounce', id, bounceActions.newSimpleBounce, bounceObject)
+  return getAnimData('bounce', id, bounceObject)
 }
 
 export function getFade (id) {
-  return getAnimData('fade', id, fadeActions.newSimpleFade, fadeObject)
+  return getAnimData('fade', id, fadeObject)
 }
 
 export function getShake (id) {
@@ -28,14 +28,11 @@ export function getTada (id) {
   return getAnimData('tada', id)
 }
 
-function getAnimData (type, id, creater, returner) {
+function getAnimData (type, id, returner) {
   const state = stateByType(type)
   if (state.has(id)) {
     console.log(id)
     return state.get(id)
-  } else {
-    creater(id)
-    return returner({ id: id })
   }
 }
 
