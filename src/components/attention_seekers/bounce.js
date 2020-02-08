@@ -2,20 +2,34 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import getAnimation from '../../data/animation'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
+import bounceActions from '../../data/bounce/bounceActions'
 
-function bounce ({ id, transformOrigin, bounces, topLimit, ...rest }) {
-  const animation = getAnimation(id)
-  if (transformOrigin !== null) {
-    animation.WebkitTransformOrigin = transformOrigin
-    animation.transfromOrigin = transformOrigin
+function bounce ({ id, bounces, topLimit, transformOrigin, ...rest }) {
+  let _transformOrigin, _bounces, _topLimit
+
+  if (!rest.bounce.has(id)) {
+    bounceActions.newBounce(id, bounces, topLimit, transformOrigin)
+    _transformOrigin = transformOrigin
+    _bounces = bounces
+    _topLimit = topLimit
   } else {
-    animation.WebkitTransformOrigin = 'center bottom'
+    _transformOrigin = rest.bounce.transformOrigin
+    _bounces = rest.bounce.bounces
+    _topLimit = rest.bounce.topLimit
+  }
+
+  const animation = getAnimation(id)
+  if (_transformOrigin !== null) {
+    animation.transfromOrigin = _transformOrigin
+  } else {
     animation.transformOrigin = 'center bottom'
   }
 
+  console.log(rest.bounce)
+
   // test
   animation.animationIterationCount = 'infinite'
-  const rule = '@keyframes ' + id + ' {\n' + bounceKeyframes(bounces, null) + '\n}'
+  const rule = '@keyframes ' + id + ' {\n' + bounceKeyframes(_bounces || 3, _topLimit) + '\n}'
   CSSHandlerActions.insertRule(rule, id)
 
   return (

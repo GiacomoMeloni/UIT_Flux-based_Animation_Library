@@ -1,18 +1,20 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import uit from './uit'
+import uit, { getBounce } from './uit'
 
 function App (props) {
+  const bounce1 = getBounce('bounce1')
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <uit.bounce id="bounce1" bounces={7} {...props}>
-          <p onClick={ () => props.bounce.changeValue('bounces', 4) }>
+          <p onClick={ () => bounce1.setBounces(7) }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
-            { props.bounce.state.bounces }
+            { bounce1.bounces }
           </p>
         </uit.bounce>
         <uit.bounce id="bounce2" bounces={2} {...props}>

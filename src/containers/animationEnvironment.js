@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container } from 'flux/utils'
-import bounceActions from '../data/bounce/bounceActions'
 import bounceStore from '../data/bounce/bounceStore'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
 // import '../animate.css'
@@ -16,13 +15,8 @@ function getStores () {
 
 function getState () {
   return {
-    bounce: {
-      state: bounceStore.getState(),
-      changeValue: bounceActions.changeValue
-    },
-    shake: {
-      // state: shakeStore.getState()
-    }
+    bounce: bounceStore.getState(),
+    shake: ''// state: shakeStore.getState()
   }
 }
 
