@@ -4,32 +4,25 @@ import getAnimation from '../../data/animation'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 import bounceActions from '../../data/bounce/bounceActions'
 
-function bounce ({ id, bounces, topLimit, transformOrigin, ...rest }) {
-  let _transformOrigin, _bounces, _topLimit
+function bounce ({
+  id, bounces, topLimit, transformOrigin,
+  duration, timing, delay, iterations, direction, fillMode, playState, ...rest
+}) {
+  const animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
 
   if (!rest.bounce.has(id)) {
     bounceActions.newBounce(id, bounces, topLimit, transformOrigin)
-    _transformOrigin = transformOrigin
-    _bounces = bounces
-    _topLimit = topLimit
   } else {
     const bounceObj = rest.bounce.get(id)
-    _transformOrigin = bounceObj.transformOrigin
-    _bounces = bounceObj.bounces
-    _topLimit = bounceObj.topLimit
-  }
 
-  const animation = getAnimation(id)
-  if (_transformOrigin !== null) {
-    animation.transfromOrigin = _transformOrigin
-  } else {
-    animation.transformOrigin = 'center bottom'
-  }
+    animation.transfromOrigin = bounceObj.transformOrigin || 'center bottom'
+    const rule = `@keyframes ${id} {\n${bounceKeyframes(bounceObj.bounces || 3, bounceObj.topLimit)}\n}`
+    console.log(rule)
+    CSSHandlerActions.insertRule(rule, id)
 
-  // test
-  animation.animationIterationCount = 'infinite'
-  const rule = '@keyframes ' + id + ' {\n' + bounceKeyframes(_bounces || 3, _topLimit) + '\n}'
-  CSSHandlerActions.insertRule(rule, id)
+    // test
+    animation.animationIterationCount = 'infinite'
+  }
 
   return (
     <div id={id} style={animation}>
@@ -88,12 +81,31 @@ function bounceKeyframes (bounces, topLimit) {
   return originFrame + bounceFrame
 }
 
+export function setBounces (value) {
+  bounceActions.changeValue(this.id, 'bounces', value)
+}
+
+export function setTopLimit (value) {
+  bounceActions.changeValue(this.id, 'topLimit', value)
+}
+
+export function setTransformOrigin (value) {
+  bounceActions.changeValue(this.id, 'transformOrigin', value)
+}
+
 bounce.propTypes = {
   id: PropTypes.string,
   anim: PropTypes.object,
   transformOrigin: PropTypes.string,
   bounces: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  topLimit: PropTypes.number
+  topLimit: PropTypes.number,
+  duration: PropTypes.string,
+  timing: PropTypes.string,
+  delay: PropTypes.string,
+  iterations: PropTypes.string,
+  direction: PropTypes.string,
+  fillMode: PropTypes.string,
+  playState: PropTypes.string
 }
 
 export default bounce

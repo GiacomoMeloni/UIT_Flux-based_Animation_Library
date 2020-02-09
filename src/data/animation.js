@@ -1,53 +1,27 @@
-const animation = {
-  animationDuration: '1s',
-  animationTimingFunction: 'ease',
-  animationDelay: '0s',
-  animationIterationCount: '1',
-  animationDirection: 'normal',
-  animationFillMode: 'both',
-  animationPlayState: 'running'
-}
-
-// TODO: Create function to change keyframes depending on keyframes parameter
 /**
- * @param animationType
+ * @param animationName
+ * @param duration
+ * @param timing
+ * @param delay
+ * @param iterations
+ * @param direction
+ * @param fillMode
+ * @param playState
  * @returns animation object for the specific component
  */
-function getAnimation (animationType) {
-  return {
-    ...animation,
-    animationName: animationType
-  }
-}
+function getAnimation (animationName, duration, timing, delay, iterations, direction, fillMode, playState) {
+  const animation = {}
 
-function customProperties (_animReturn, anim) {
-  if (anim.prototype.hasOwnProperty.call(anim, 'duration')) {
-    _animReturn.animationDuration = anim.duration
-  }
+  animation.animationDuration = duration || '1s'
+  animation.animationTiming = timing || 'ease'
+  animation.animationDelay = delay || '0s'
+  animation.animationIterationCount = iterations || '1'
+  animation.animationDirection = direction || 'normal'
+  animation.animationFillMode = fillMode || 'both'
+  animation.animationPlayState = playState || 'running'
+  animation.animationName = animationName
 
-  if (anim.prototype.hasOwnProperty.call(anim, 'timing')) {
-    _animReturn.animationTimingFunction = anim.timing
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'delay')) {
-    _animReturn.animationDelay = anim.delay
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'iterations')) {
-    _animReturn.animationIterationCount = anim.iterations
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'direction')) {
-    _animReturn.animationDirection = anim.direction
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'fillMode')) {
-    _animReturn.animationFillMode = anim.fillMode
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'playState')) {
-    _animReturn.animationPlayState = anim.playState
-  }
+  return animation
 }
 
 export default getAnimation
