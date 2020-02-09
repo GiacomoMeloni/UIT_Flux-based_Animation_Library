@@ -13,9 +13,10 @@ function bounce ({ id, bounces, topLimit, transformOrigin, ...rest }) {
     _bounces = bounces
     _topLimit = topLimit
   } else {
-    _transformOrigin = rest.bounce.transformOrigin
-    _bounces = rest.bounce.bounces
-    _topLimit = rest.bounce.topLimit
+    const bounceObj = rest.bounce.get(id)
+    _transformOrigin = bounceObj.transformOrigin
+    _bounces = bounceObj.bounces
+    _topLimit = bounceObj.topLimit
   }
 
   const animation = getAnimation(id)
@@ -24,8 +25,6 @@ function bounce ({ id, bounces, topLimit, transformOrigin, ...rest }) {
   } else {
     animation.transformOrigin = 'center bottom'
   }
-
-  console.log(rest.bounce)
 
   // test
   animation.animationIterationCount = 'infinite'

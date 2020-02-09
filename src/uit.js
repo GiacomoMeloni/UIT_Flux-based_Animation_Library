@@ -26,9 +26,9 @@ export function getTada (id) {
   return getAnimData('tada', id)
 }
 
-function getAnimData (type, id, returner) {
+function getAnimData (type, id, tempObject) {
   const state = objectByType(type)
-  const obj = state.get(id, returner({ id: id })).toJS()
+  const obj = state.get(id, tempObject({ id: id })).toJS()
   const ret = {
     setTopLimit,
     setDuration,
@@ -68,7 +68,6 @@ function actionsByType (type) {
 }
 
 function setBounces (value) {
-  console.log(this)
   bounceActions.changeValue(this.id, 'bounces', value)
 }
 

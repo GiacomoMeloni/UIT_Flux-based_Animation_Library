@@ -10,7 +10,7 @@ function App (props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.bounce id="bounce1" bounces={7} {...props}>
+        <uit.bounce id="bounce1" bounces={3} {...props}>
           <p onClick={ () => bounce1.setBounces(7) }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
