@@ -19,7 +19,6 @@ export function getBounce (id) {
 }
 
 export function getFade (id) {
-  console.log(getAnimData('fade', id, fadeObject))
   return {
     ...getAnimData('fade', id, fadeObject),
     setEntry,

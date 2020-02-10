@@ -21,12 +21,12 @@ function getState () {
   return {
     bounce: {
       state: bounceStore.getState(),
-      changeValue: bounceActions.changeValue
+      changeBounceValue: bounceActions.changeBounceValue
     },
     fade: {
       state: fadeStore.getState(),
       newFade: fadeActions.newFade,
-      changeValue: fadeActions.changeValue
+      changeFadeValue: fadeActions.changeFadeValue
     },
     cssHandler: {
       state: CSSHandlerStore.getState(),

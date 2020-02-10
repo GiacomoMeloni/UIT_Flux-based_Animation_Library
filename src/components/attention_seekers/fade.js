@@ -11,9 +11,10 @@ function fade ({
   const animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
 
   if (!rest.fade.state.has(id)) {
-    fadeActions.newFade(id, entry, direction, duration, opacityLimit)
+    fadeActions.newFade(id, entry, direction, opacityLimit)
   } else {
     const fadeObj = rest.fade.state.get(id)
+
     CSSHandlerActions.insertRule(fadeKeyframe(fadeObj), id)
 
     // test
@@ -85,15 +86,15 @@ function fadeKeyframe (state) {
 }
 
 export function setEntry (value) {
-  fadeActions.changeValue(this.id, 'entry', value)
+  fadeActions.changeFadeValue(this.id, 'entry', value)
 }
 
 export function setDirection (value) {
-  fadeActions.changeValue(this.id, 'direction', value)
+  fadeActions.changeFadeValue(this.id, 'direction', value)
 }
 
 export function setOpacityLimit (value) {
-  fadeActions.changeValue(this.id, 'opacityLimit', value)
+  fadeActions.changeFadeValue(this.id, 'opacityLimit', value)
 }
 
 fade.propTypes = {

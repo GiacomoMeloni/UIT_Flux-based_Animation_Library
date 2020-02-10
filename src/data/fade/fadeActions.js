@@ -11,9 +11,9 @@ const fadeActions = {
       opacityLimit: opacityLimit
     })
   },
-  changeValue (id, key, value) {
+  changeFadeValue (id, key, value) {
     animationDispatcher.dispatch({
-      type: fadeActionTypes.CHANGE_VALUE,
+      type: fadeActionTypes.CHANGE_FADE_VALUE,
       id: id,
       key: key,
       value: value

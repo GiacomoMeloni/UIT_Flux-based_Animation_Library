@@ -26,7 +26,7 @@ class FadeStore extends ReduceStore {
           })
         )
 
-      case fadeActionTypes.CHANGE_VALUE:
+      case fadeActionTypes.CHANGE_FADE_VALUE:
         if (state.get(action.id).has(action.key)) {
           return state.setIn([action.id, action.key], action.value)
         } else {
