@@ -5,16 +5,22 @@ import fadeActions from '../../data/fade/fadeActions'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
 const fade = ({ id, entry, direction, duration, opacityLimit, ...rest }) => {
-  const animation = getAnimation(id)
 
-  if (!rest.fade.state.has(id)) {
+  if (!rest.fade.has(id)) {
     fadeActions.newFade(id, entry, direction, duration, opacityLimit)
   }
 
-  const state = rest.fade.state.get(id)
+  const animation = getAnimation(id)
+  if (duration !== null) {
+    animation.duration = duration
+  } else {
+    animation.duration = fadeState.get('duration')
+  }
 
-  if (state) {
-    CSSHandlerActions.insertRule(fadeKeyframe(state), id)
+  const fadeState = rest.fade.state.get(id)
+
+  if (fadeState) {
+    CSSHandlerActions.insertRule(fadeKeyframe(fadeState), id)
   }
 
   function fadeKeyframe (state) {

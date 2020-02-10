@@ -2,6 +2,7 @@ import { ReduceStore } from 'flux/utils'
 import animationDispatcher from '../animationDispatcher'
 import bounce from './bounceObject'
 import bounceActionTypes from './bounceActionTypes'
+import Immutable from 'immutable'
 
 class BounceStore extends ReduceStore {
   constructor () {
@@ -9,14 +10,25 @@ class BounceStore extends ReduceStore {
   }
 
   getInitialState () {
-    return bounce()
+    return Immutable.OrderedMap()
   }
 
   reduce (state, action) {
     switch (action.type) {
+      case bounceActionTypes.NEW_BOUNCE: {
+        return state.set(
+          action.id,
+          bounce({
+            id: action.id,
+            bounces: action.bounces,
+            topLimit: action.topLimit,
+            origin: action.origin
+          }))
+      }
+
       case bounceActionTypes.CHANGE_VALUE:
-        if (state.has(action.key)) {
-          return state.set(action.key, action.value)
+        if (state.get(action.id).has(action.key)) {
+          return state.setIn([action.id, action.key], action.value)
         } else {
           throw Error('bounce does not have a property ' + action.key)
         }

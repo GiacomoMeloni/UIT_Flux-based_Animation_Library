@@ -12,7 +12,8 @@ import '../test.css'
 function getStores () {
   return [
     bounceStore,
-    fadeStore
+    fadeStore,
+    CSSHandlerStore
   ]
 }
 
