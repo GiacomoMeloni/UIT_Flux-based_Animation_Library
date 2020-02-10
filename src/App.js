@@ -8,13 +8,13 @@ function App (props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.bounce id="bounce1" bounces={3} {...props}>
-          <p onClick={ () => bounce1.setBounces(7) }>
+        <uit.fade id='fade01' entry={true} {...props}>
+          <p onClick={ () => getFade('fade01').setEntry(false) }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
-            { bounce1.bounces }
+            { getFade('fade01').direction }
           </p>
-        </uit.bounce>
+        </uit.fade>
         <uit.bounce id="bounce2" bounces={2} {...props}>
           Ciao sono gustavo
         </uit.bounce>

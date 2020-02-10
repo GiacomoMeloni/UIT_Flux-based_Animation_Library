@@ -10,14 +10,13 @@ function bounce ({
 }) {
   const animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
 
-  if (!rest.bounce.has(id)) {
+  if (!rest.bounce.state.has(id)) {
     bounceActions.newBounce(id, bounces, topLimit, transformOrigin)
   } else {
-    const bounceObj = rest.bounce.get(id)
+    const bounceObj = rest.bounce.state.get(id)
 
     animation.transfromOrigin = bounceObj.transformOrigin || 'center bottom'
     const rule = `@keyframes ${id} {\n${bounceKeyframes(bounceObj.bounces || 3, bounceObj.topLimit)}\n}`
-    console.log(rule)
     CSSHandlerActions.insertRule(rule, id)
 
     // test

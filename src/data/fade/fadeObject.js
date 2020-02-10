@@ -2,7 +2,7 @@ import Immutable from 'immutable'
 
 const fade = Immutable.Record({
   id: '',
-  type: 'bounce',
+  type: 'fade',
   entry: true,
   direction: 'left',
   opacityLimit: 100

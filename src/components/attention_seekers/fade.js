@@ -10,7 +10,7 @@ function fade ({
 }) {
   const animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
 
-  if (!rest.fade.has(id)) {
+  if (!rest.fade.state.has(id)) {
     fadeActions.newFade(id, entry, direction, duration, opacityLimit)
   } else {
     const fadeObj = rest.fade.state.get(id)
@@ -84,17 +84,16 @@ function fadeKeyframe (state) {
   return originFrame + endFrame
 }
 
-
 export function setEntry (value) {
-  bounceActions.changeValue(this.id, 'entry', value)
+  fadeActions.changeValue(this.id, 'entry', value)
 }
 
 export function setDirection (value) {
-  bounceActions.changeValue(this.id, 'direction', value)
+  fadeActions.changeValue(this.id, 'direction', value)
 }
 
 export function setOpacityLimit (value) {
-  bounceActions.changeValue(this.id, 'opacityLimit', value)
+  fadeActions.changeValue(this.id, 'opacityLimit', value)
 }
 
 fade.propTypes = {

@@ -25,10 +25,8 @@ function getState () {
     },
     fade: {
       state: fadeStore.getState(),
-      newSimpleFade: fadeActions.newSimpleFade,
       newFade: fadeActions.newFade,
-      changeEntry: fadeActions.changeEntry,
-      changeDirection: fadeActions.changeDirection
+      changeValue: fadeActions.changeValue
     },
     cssHandler: {
       state: CSSHandlerStore.getState(),
