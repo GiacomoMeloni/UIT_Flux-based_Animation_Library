@@ -1,72 +1,27 @@
-const animation = {
-  WebkitAnimationDuration: '1s',
-  animationDuration: '1s',
-  WebkitAnimationTimingFunction: 'ease',
-  animationTimingFunction: 'ease',
-  WebkitAnimationDelay: '0s',
-  animationDelay: '0s',
-  WebkitAnimationIterationCount: '1',
-  animationIterationCount: '1',
-  WebkitAnimationDirection: 'normal',
-  animationDirection: 'normal',
-  WebkitAnimationFillMode: 'both',
-  animationFillMode: 'both',
-  WebkitAnimationPlayState: 'running',
-  animationPlayState: 'running'
-}
-
-// TODO: Create function to change keyframes depending on keyframes parameter
 /**
- * @param keyframes: keyframes passed as an object
- * @param index: index of keyframes rule of current animation in the CSS
- * @param animationType
- * @param anim: object with default values: {
- *   duration: 1s,
- *   'timing': ease,
- *   delay: 0s,
- *   iterations: 1,
- *   direction: normal,
- *   'fillMode': both,
- *   'playState': running
- * }
+ * @param animationName
+ * @param duration
+ * @param timing
+ * @param delay
+ * @param iterations
+ * @param direction
+ * @param fillMode
+ * @param playState
  * @returns animation object for the specific component
- * @throws TypeError if anim is not an object
  */
-function getAnimation (animationType) {
-  return {
-    ...animation,
-    animationName: animationType
-  }
-}
+function getAnimation (animationName, duration, timing, delay, iterations, direction, fillMode, playState) {
+  const animation = {}
 
-function customProperties (_animReturn, anim) {
-  if (anim.prototype.hasOwnProperty.call(anim, 'duration')) {
-    _animReturn.animationDuration = anim.duration
-  }
+  animation.animationDuration = duration || '1s'
+  animation.animationTiming = timing || 'ease'
+  animation.animationDelay = delay || '0s'
+  animation.animationIterationCount = iterations || '1'
+  animation.animationDirection = direction || 'normal'
+  animation.animationFillMode = fillMode || 'both'
+  animation.animationPlayState = playState || 'running'
+  animation.animationName = animationName
 
-  if (anim.prototype.hasOwnProperty.call(anim, 'timing')) {
-    _animReturn.animationTimingFunction = anim.timing
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'delay')) {
-    _animReturn.animationDelay = anim.delay
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'iterations')) {
-    _animReturn.animationIterationCount = anim.iterations
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'direction')) {
-    _animReturn.animationDirection = anim.direction
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'fillMode')) {
-    _animReturn.animationFillMode = anim.fillMode
-  }
-
-  if (anim.prototype.hasOwnProperty.call(anim, 'playState')) {
-    _animReturn.animationPlayState = anim.playState
-  }
+  return animation
 }
 
 export default getAnimation

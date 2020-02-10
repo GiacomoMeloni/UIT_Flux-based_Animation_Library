@@ -8,43 +8,21 @@ const fadeActions = {
       id: id
     })
   },
-  newFade (id, entry, direction, duration, opacityLimit) {
+  newFade (id, entry, direction, opacityLimit) {
     animationDispatcher.dispatch({
       type: fadeActionTypes.NEW_FADE,
       id: id,
       entry: entry,
       direction: direction,
-      duration: duration,
       opacityLimit: opacityLimit
     })
   },
-  changeEntry (key, entry) {
+  changeValue (id, key, value) {
     animationDispatcher.dispatch({
-      type: fadeActionTypes.CHANGE_ENTRY,
-      key: key,
-      entry: entry
-    })
-  },
-  changeDirection (id, key, direction) {
-    animationDispatcher.dispatch({
-      type: fadeActionTypes.CHANGE_DIRECTION,
+      type: fadeActionTypes.CHANGE_VALUE,
       id: id,
       key: key,
-      direction: direction
-    })
-  },
-  changeDuration (key, duration) {
-    animationDispatcher.dispatch({
-      type: fadeActionTypes.CHANGE_DURATION,
-      key: key,
-      duration: duration
-    })
-  },
-  changeOpacityLimit (key, opacity) {
-    animationDispatcher.dispatch({
-      type: fadeActionTypes.CHANGE_OPACITY,
-      key: key,
-      opacity: opacity
+      value: value
     })
   }
 }

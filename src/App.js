@@ -3,7 +3,6 @@ import logo from './logo.svg'
 import './App.css'
 import uit, { getFade, getBounce } from './uit'
 
-
 function App (props) {
   return (
     <div className="App">
