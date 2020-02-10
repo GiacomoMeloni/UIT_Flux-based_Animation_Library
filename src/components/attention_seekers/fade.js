@@ -8,11 +8,13 @@ function fade ({
   id, entry, animationDirection, opacityLimit,
   duration, timing, delay, iterations, direction, fillMode, playState, ...rest
 }) {
-  const animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
+  let animation
 
   if (!rest.fade.state.has(id)) {
+    animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
     fadeActions.newFade(id, entry, direction, opacityLimit)
   } else {
+    animation = getAnimation(id, {}, document.getElementById(id).style)
     const fadeObj = rest.fade.state.get(id)
 
     CSSHandlerActions.insertRule(id, fadeKeyframe(fadeObj))
@@ -22,7 +24,7 @@ function fade ({
   }
 
   return (
-    <div style={animation}>
+    <div id={id} style={animation}>
       { rest.children }
     </div>
   )

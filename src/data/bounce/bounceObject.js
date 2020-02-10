@@ -5,7 +5,9 @@ const bounce = Immutable.Record({
   type: 'bounce',
   bounces: 3,
   topLimit: 0,
-  origin: 'center bottom'
+  origin: 'center bottom',
+  entry: null,
+  entryDirection: null
 })
 
 export default bounce

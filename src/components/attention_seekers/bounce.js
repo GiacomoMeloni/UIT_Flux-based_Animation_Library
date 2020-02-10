@@ -5,21 +5,23 @@ import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 import bounceActions from '../../data/bounce/bounceActions'
 
 function bounce ({
-  id, bounces, topLimit, transformOrigin,
+  id, bounces, topLimit, transformOrigin, entry, entryDirection,
   duration, timing, delay, iterations, direction, fillMode, playState, ...rest
 }) {
   let animation
 
   if (!rest.bounce.state.has(id)) {
-    animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
+    animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
     bounceActions.newBounce(id, bounces, topLimit, transformOrigin)
   } else {
     // TODO: code to verify
-    animation = document.getElementById(id).style.animation
+    animation = getAnimation(id, {}, document.getElementById(id).style)
     const bounceObj = rest.bounce.state.get(id)
 
-    animation.transfromOrigin = bounceObj.transformOrigin || 'center bottom'
-    const rule = `@keyframes ${id} {\n${bounceKeyframes(bounceObj.bounces || 3, bounceObj.topLimit)}\n}`
+    animation.transfromOrigin = bounceObj.transformOrigin
+    const rule = `@keyframes ${id} {
+      ${bounceKeyframes(bounceObj)}
+    }`
     CSSHandlerActions.insertRule(id, rule)
 
     // test
@@ -34,7 +36,8 @@ function bounce ({
 }
 
 // TODO: need to be tested to check if animation bounces effectively
-function bounceKeyframes (bounces, topLimit) {
+function bounceKeyframes ({ bounces, topLimit, entry, entryDirection }) {
+  bounces = bounces || 3
   const frames = bounces * 2
   const linspace = Math.floor(100 / frames)
   // if topLimit not null or zero
@@ -46,9 +49,7 @@ function bounceKeyframes (bounces, topLimit) {
   let translate = topLimit
   let multiplier = bounces - 1
   let bounceFrame = '\n\n' + Math.floor(linspace * 1.5) + '% {\n' +
-    '   -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n' +
     '   animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n' +
-    '   -webkit-transform: translate3d(0, ' + -translate + 'px, 0);\n' +
     '   transform: translate3d(0, ' + -translate + 'px, 0);\n' +
     '}'
 
@@ -62,9 +63,7 @@ function bounceKeyframes (bounces, topLimit) {
           translate /= 2
         }
         bounceFrame += '\n\n' + linspace * i + '% {\n' +
-          '   -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n' +
           '   animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n' +
-          '   -webkit-transform: translate3d(0, ' + -translate + 'px, 0);\n' +
           '   transform: translate3d(0, ' + -translate + 'px, 0);\n' +
           '}'
 
@@ -74,9 +73,7 @@ function bounceKeyframes (bounces, topLimit) {
   }
 
   originFrame += 'to {\n' +
-    '   -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n' +
     '   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n' +
-    '   -webkit-transform: translate3d(0, 0, 0);\n' +
     '   transform: translate3d(0, 0, 0);\n' +
     '}'
 
@@ -101,6 +98,8 @@ bounce.propTypes = {
   transformOrigin: PropTypes.string,
   bounces: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   topLimit: PropTypes.number,
+  entry: PropTypes.oneOf(['in', 'out']),
+  entryDirection: PropTypes.oneOf(['left', 'right', 'up', 'down']),
   duration: PropTypes.string,
   timing: PropTypes.string,
   delay: PropTypes.string,
