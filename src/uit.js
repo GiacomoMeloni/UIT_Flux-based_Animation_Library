@@ -1,6 +1,6 @@
 import getAnimData from './viewInterface'
 import bounce, { setBounces, setTopLimit, setTransformOrigin } from './components/attention_seekers/bounce'
-import fade, { setEntry, setDirection, setOpacityLimit } from './components/attention_seekers/fade'
+import fade, { setEntry, setFadeDirection, setOpacityLimit } from './components/attention_seekers/fade'
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
 
@@ -22,7 +22,7 @@ export function getFade (id) {
   return {
     ...getAnimData('fade', id, fadeObject),
     setEntry,
-    setDirection,
+    setFadeDirection,
     setOpacityLimit
   }
 }

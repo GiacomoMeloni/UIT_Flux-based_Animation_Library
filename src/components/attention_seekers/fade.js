@@ -89,7 +89,7 @@ export function setEntry (value) {
   fadeActions.changeFadeValue(this.id, 'entry', value)
 }
 
-export function setDirection (value) {
+export function setFadeDirection (value) {
   fadeActions.changeFadeValue(this.id, 'direction', value)
 }
 
