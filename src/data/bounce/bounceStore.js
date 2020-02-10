@@ -26,7 +26,7 @@ class BounceStore extends ReduceStore {
           }))
       }
 
-      case bounceActionTypes.CHANGE_VALUE:
+      case bounceActionTypes.CHANGE_BOUNCE_VALUE:
         if (state.get(action.id).has(action.key)) {
           return state.setIn([action.id, action.key], action.value)
         } else {

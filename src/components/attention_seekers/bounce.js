@@ -8,16 +8,19 @@ function bounce ({
   id, bounces, topLimit, transformOrigin,
   duration, timing, delay, iterations, direction, fillMode, playState, ...rest
 }) {
-  const animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
+  let animation
 
   if (!rest.bounce.state.has(id)) {
+    animation = getAnimation(id, duration, timing, delay, iterations, direction, fillMode, playState)
     bounceActions.newBounce(id, bounces, topLimit, transformOrigin)
   } else {
+    // TODO: code to verify
+    animation = document.getElementById(id).style.animation
     const bounceObj = rest.bounce.state.get(id)
 
     animation.transfromOrigin = bounceObj.transformOrigin || 'center bottom'
     const rule = `@keyframes ${id} {\n${bounceKeyframes(bounceObj.bounces || 3, bounceObj.topLimit)}\n}`
-    CSSHandlerActions.insertRule(rule, id)
+    CSSHandlerActions.insertRule(id, rule)
 
     // test
     animation.animationIterationCount = 'infinite'
