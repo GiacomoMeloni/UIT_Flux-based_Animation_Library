@@ -49,6 +49,10 @@ class CSSHandlerStore extends ReduceStore {
         }
       }
 
+      case CSSHandlerActionTypes.UPDATE_STYLE_RULE:
+        document.getElementById(action.id).style[action.rule] = action.value
+        return state
+
       default:
         return state
     }

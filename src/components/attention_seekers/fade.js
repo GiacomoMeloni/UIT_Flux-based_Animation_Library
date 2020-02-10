@@ -15,7 +15,7 @@ function fade ({
   } else {
     const fadeObj = rest.fade.state.get(id)
 
-    CSSHandlerActions.insertRule(fadeKeyframe(fadeObj), id)
+    CSSHandlerActions.insertRule(id, fadeKeyframe(fadeObj))
 
     // test
     animation.animationIterationCount = 'infinite'

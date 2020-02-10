@@ -20,7 +20,7 @@ function bounce ({
 
     animation.transfromOrigin = bounceObj.transformOrigin || 'center bottom'
     const rule = `@keyframes ${id} {\n${bounceKeyframes(bounceObj.bounces || 3, bounceObj.topLimit)}\n}`
-    CSSHandlerActions.insertRule(rule, id)
+    CSSHandlerActions.insertRule(id, rule)
 
     // test
     animation.animationIterationCount = 'infinite'

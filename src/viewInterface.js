@@ -1,5 +1,6 @@
 import bounceStore from './data/bounce/bounceStore'
 import fadeStore from './data/fade/fadeStore'
+import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
 
 function getAnimData (type, id, tempObject) {
   const state = objectByType(type)
@@ -49,31 +50,31 @@ function setTopLimit (value) {
 }
 */
 function setDuration (value) {
-  document.getElementById(this.id).style.animationDuration = value
+  CSSHandlerActions.updateStyleRule(this.id, 'animationDuration', value)
 }
 
 function setTiming (value) {
-  document.getElementById(this.id).style.animationTimingFunction = value
+  CSSHandlerActions.updateStyleRule(this.id, 'animationTimingFunction', value)
 }
 
 function setDelay (value) {
-  document.getElementById(this.id).style.animationDelay = value
+  CSSHandlerActions.updateStyleRule(this.id, 'animationDelay', value)
 }
 
 function setIterations (value) {
-  document.getElementById(this.id).style.animationIterationCount = value
+  CSSHandlerActions.updateStyleRule(this.id, 'animationIterationCount', value)
 }
 
 function setDirection (value) {
-  document.getElementById(this.id).style.animationDirection = value
+  CSSHandlerActions.updateStyleRule(this.id, 'animationDirection', value)
 }
 
 function setFillMode (value) {
-  document.getElementById(this.id).style.animationFillMode = value
+  CSSHandlerActions.updateStyleRule(this.id, 'animationFillMode', value)
 }
 
 function setPlayState (value) {
-  document.getElementById(this.id).style.animationPlayState = value
+  CSSHandlerActions.updateStyleRule(this.id, 'animationPlayState', value)
 }
 
 export default getAnimData

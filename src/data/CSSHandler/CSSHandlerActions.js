@@ -3,13 +3,21 @@ import CSSHandlerActionTypes from './CSSHandlerActionTypes'
 
 var documentLoaded = false
 
-const Actions = {
-  insertRule (rule, id) {
-    sheetReady(rule, id)
+const CSSHandlerActions = {
+  insertRule (id, rule) {
+    sheetReady(id, rule)
+  },
+  updateStyleRule (id, rule, value) {
+    animationDispatcher.dispatch({
+      type: CSSHandlerActionTypes.UPDATE_STYLE_RULE,
+      id: id,
+      rule: rule,
+      value: value
+    })
   }
 }
 
-function sheetReady (rule, id) {
+function sheetReady (id, rule) {
   if (!documentLoaded) {
     if (document.readyState === 'complete') {
       documentLoaded = true
@@ -37,4 +45,4 @@ function sheetReady (rule, id) {
   }
 }
 
-export default Actions
+export default CSSHandlerActions

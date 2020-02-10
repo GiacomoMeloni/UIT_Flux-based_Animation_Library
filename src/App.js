@@ -4,12 +4,14 @@ import './App.css'
 import uit, { getFade, getBounce } from './uit'
 
 function App (props) {
+  const fade01 = getFade('fade01')
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <uit.fade id='fade01' direction={'down'} opacityLimit={ 80 } {...props}>
-          <p onClick={ () => getFade('fade01').setOpacityLimit(100) }>
+          <p onClick={ () => fade01.setOpacityLimit(100) }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
             { getFade('fade01').opacityLimit }
