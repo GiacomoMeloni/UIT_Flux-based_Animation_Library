@@ -11,9 +11,9 @@ const bounceActions = {
       origin: origin
     })
   },
-  changeBounceValue (id, key, value) {
+  changeValue (id, key, value) {
     animationDispatcher.dispatch({
-      type: bounceActionTypes.CHANGE_VALUE,
+      type: bounceActionTypes.CHANGE_BOUNCE_VALUE,
       id: id,
       key: key,
       value: value
