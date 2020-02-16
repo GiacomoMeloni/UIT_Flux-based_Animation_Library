@@ -12,15 +12,18 @@ function fade ({
 
   if (!rest.fade.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
-    fadeActions.newFade(id, entry, entryDirection, opacityLimit)
+    fadeActions.newFade(
+      id, entry, entryDirection, opacityLimit,
+      duration, timing, delay, iterations, direction, fillMode, playState)
   } else {
-    animation = getAnimation(id, {}, document.getElementById(id).style)
     const fadeObj = rest.fade.state.get(id)
-
+    console.log(fadeObj)
+    animation = getAnimation(id, {}, fadeObj.style)
+    console.log(animation)
     CSSHandlerActions.insertRule(id, fadeKeyframe(fadeObj))
 
     // test
-    animation.animationIterationCount = 'infinite'
+    // animation.animationIterationCount = 'infinite'
   }
 
   return (
@@ -88,15 +91,15 @@ function fadeKeyframe (state) {
 }
 
 export function setEntry (value) {
-  fadeActions.changeFadeValue(this.id, 'entry', value)
+  fadeActions.changeValue(this.id, 'entry', value)
 }
 
 export function setEntryDirection (value) {
-  fadeActions.changeFadeValue(this.id, 'entryDirection', value)
+  fadeActions.changeValue(this.id, 'entryDirection', value)
 }
 
 export function setOpacityLimit (value) {
-  fadeActions.changeFadeValue(this.id, 'opacityLimit', value)
+  fadeActions.changeValue(this.id, 'opacityLimit', value)
 }
 
 fade.propTypes = {
