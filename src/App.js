@@ -1,22 +1,22 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import uit, { getFade, getBounce, getFlash } from './uit'
+import uit, { getFade, getBounce, getFlash, getPulse } from './uit'
 
 function App (props) {
-  const flash01 = getFlash('flash01')
+  const pulse01 = getPulse('pulse01')
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.flash id='flash01' flashingTimes={4} {...props}>
-          <p onClick={ () => flash01.setFlashingTimes(6) }>
+        <uit.pulse id='pulse01' enlargement={5} {...props}>
+          <p onClick={ () => pulse01.setEnlargement(20) }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
-            { flash01.flashingTimes }
+            { pulse01.enlargement }
           </p>
-        </uit.flash>
+        </uit.pulse>
         <uit.bounce id="bounce2" bounces={2} {...props}>
           Ciao sono gustavo
         </uit.bounce>

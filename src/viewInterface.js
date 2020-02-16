@@ -1,6 +1,7 @@
 import bounceStore from './data/bounce/bounceStore'
 import fadeStore from './data/fade/fadeStore'
 import flashStore from './data/flash/flashStore'
+import pulseStore from './data/pulse/pulseStore'
 import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
 
 function getAnimData (type, id, tempObject) {
@@ -30,6 +31,8 @@ function objectByType (type) {
       return fadeStore.getState()
     case 'flash':
       return flashStore.getState()
+    case 'pulse':
+      return pulseStore.getState()
 
     default:
       throw TypeError(`"${type}" is not an animation defined in uit`)
