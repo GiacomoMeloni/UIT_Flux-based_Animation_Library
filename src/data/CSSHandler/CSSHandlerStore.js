@@ -15,6 +15,7 @@ class CSSHandlerStore extends ReduceStore {
   reduce (state, action) {
     switch (action.type) {
       case CSSHandlerActionTypes.INSERT_RULE: {
+        console.log('tua mamma')
         let index
 
         // Called only if state.sheet is not defined yet

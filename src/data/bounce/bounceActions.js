@@ -2,13 +2,15 @@ import animationDispatcher from '../animationDispatcher'
 import bounceActionTypes from './bounceActionTypes'
 
 const bounceActions = {
-  newBounce (id, bounces, topLimit, origin) {
+  newBounce (id, bounces, limit, origin, entry, entryDirection) {
     animationDispatcher.dispatch({
       type: bounceActionTypes.NEW_BOUNCE,
       id: id,
       bounces: bounces,
-      topLimit: topLimit,
-      origin: origin
+      limit: limit,
+      origin: origin,
+      entry: entry,
+      entryDirection: entryDirection
     })
   },
   changeValue (id, key, value) {

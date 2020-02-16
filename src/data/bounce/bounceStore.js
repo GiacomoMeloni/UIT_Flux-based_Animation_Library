@@ -21,8 +21,10 @@ class BounceStore extends ReduceStore {
           bounce({
             id: action.id,
             bounces: action.bounces,
-            topLimit: action.topLimit,
-            origin: action.origin
+            limit: action.limit,
+            origin: action.origin,
+            entry: action.entry,
+            entryDirection: action.entryDirection
           }))
       }
 
