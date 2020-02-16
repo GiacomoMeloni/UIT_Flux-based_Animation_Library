@@ -12,19 +12,18 @@ function flash ({
 
   if (!rest.flash.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
-    flashActions.newFlash(id, flashingTimes, duration, timing, delay, iterations, direction, fillMode, playState)
+    flashActions.newFlash(
+      id, flashingTimes,
+      duration, timing, delay, iterations, direction, fillMode, playState)
   } else {
-    animation = getAnimation(id, {}, document.getElementById(id).style)
     const flashObj = rest.flash.state.get(id)
+    animation = getAnimation(id, {}, flashObj.style)
     console.log(flashKeyframe(flashObj))
     CSSHandlerActions.insertRule(id, flashKeyframe(flashObj))
-
-    // test
-    animation.animationIterationCount = 'infinite'
   }
 
   return (
-    <div id={id} style={animation}>
+    <div id={id} style={animation} {...rest}>
       { rest.children }
     </div>
   )
@@ -53,7 +52,7 @@ function flashKeyframe (state) {
 }
 
 export function setFlashingTimes (value) {
-  flashActions.changeFlashValue(this.id, 'flashingTimes', value)
+  flashActions.changeValue(this.id, 'flashingTimes', value)
 }
 
 flash.propTypes = {

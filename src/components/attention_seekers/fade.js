@@ -5,26 +5,29 @@ import fadeActions from '../../data/fade/fadeActions'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
 function fade ({
-  id, entry, animationDirection, opacityLimit,
+  id, entry, entryDirection, opacityLimit,
   duration, timing, delay, iterations, direction, fillMode, playState, ...rest
 }) {
   let animation
 
   if (!rest.fade.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
-    fadeActions.newFade(id, entry, direction, opacityLimit)
+    fadeActions.newFade(
+      id, entry, entryDirection, opacityLimit,
+      duration, timing, delay, iterations, direction, fillMode, playState)
   } else {
-    animation = getAnimation(id, {}, document.getElementById(id).style)
     const fadeObj = rest.fade.state.get(id)
-
+    console.log(fadeObj)
+    animation = getAnimation(id, {}, fadeObj.style)
+    console.log(animation)
     CSSHandlerActions.insertRule(id, fadeKeyframe(fadeObj))
 
     // test
-    animation.animationIterationCount = 'infinite'
+    // animation.animationIterationCount = 'infinite'
   }
 
   return (
-    <div id={id} style={animation}>
+    <div id={id} style={animation} {...rest}>
       { rest.children }
     </div>
   )
@@ -52,7 +55,7 @@ function fadeKeyframe (state) {
     endFrame += 'opacity: 0;\n'
   }
 
-  switch (state.get('direction')) {
+  switch (state.get('entryDirection')) {
     case 'down':
       originFrame += 'transform: translate3d(0, -100%, 0);\n' +
         '-webkit-transform: translate3d(0, -100%, 0);\n'
@@ -88,22 +91,22 @@ function fadeKeyframe (state) {
 }
 
 export function setEntry (value) {
-  fadeActions.changeFadeValue(this.id, 'entry', value)
+  fadeActions.changeValue(this.id, 'entry', value)
 }
 
-export function setFadeDirection (value) {
-  fadeActions.changeFadeValue(this.id, 'direction', value)
+export function setEntryDirection (value) {
+  fadeActions.changeValue(this.id, 'entryDirection', value)
 }
 
 export function setOpacityLimit (value) {
-  fadeActions.changeFadeValue(this.id, 'opacityLimit', value)
+  fadeActions.changeValue(this.id, 'opacityLimit', value)
 }
 
 fade.propTypes = {
   anim: PropTypes.object,
   id: PropTypes.string,
   entry: PropTypes.bool,
-  animationDirection: PropTypes.string,
+  entryDirection: PropTypes.string,
   opacityLimit: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   timing: PropTypes.string,

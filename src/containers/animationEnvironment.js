@@ -1,11 +1,8 @@
 import React from 'react'
 import { Container } from 'flux/utils'
-import bounceActions from '../data/bounce/bounceActions'
 import bounceStore from '../data/bounce/bounceStore'
 import fadeStore from '../data/fade/fadeStore'
-import fadeActions from '../data/fade/fadeActions'
 import flashStore from '../data/flash/flashStore'
-import flashActions from '../data/flash/flashActions'
 
 import CSSHandlerActions from '../data/CSSHandler/CSSHandlerActions'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
@@ -24,18 +21,13 @@ function getStores () {
 function getState () {
   return {
     bounce: {
-      state: bounceStore.getState(),
-      changeBounceValue: bounceActions.changeBounceValue
+      state: bounceStore.getState()
     },
     fade: {
-      state: fadeStore.getState(),
-      newFade: fadeActions.newFade,
-      changeFadeValue: fadeActions.changeFadeValue
+      state: fadeStore.getState()
     },
     flash: {
-      state: flashStore.getState(),
-      newFlash: flashActions.newFlash,
-      changeFlashValue: flashActions.changeFlashValue
+      state: flashStore.getState()
     },
     cssHandler: {
       state: CSSHandlerStore.getState(),

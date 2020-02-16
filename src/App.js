@@ -5,19 +5,22 @@ import uit, { getFade, getBounce, getFlash } from './uit'
 
 function App (props) {
   const flash01 = getFlash('flash01')
+  const bounce2 = getBounce('bounce2')
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.flash id='flash01' flashingTimes={4} {...props}>
+        <uit.flash id='flash01' flashingTimes={ 4 } iterations={'infinite'}{...props}>
           <p onClick={ () => flash01.setFlashingTimes(6) }>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
             { flash01.flashingTimes }
           </p>
         </uit.flash>
-        <uit.bounce id="bounce2" bounces={2} {...props}>
+        <uit.bounce entry={'in'} id="bounce2" bounces={2} limit={2} onClick={
+          () => { bounce2.setIterations('infinite') }} {...props}
+        >
           Ciao sono gustavo
         </uit.bounce>
         <a

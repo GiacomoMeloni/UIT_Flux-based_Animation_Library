@@ -32,7 +32,7 @@ function sheetReady (id, rule) {
         }
       }
     } else {
-      setTimeout(() => sheetReady(rule, id), 9)
+      setTimeout(() => sheetReady(id, rule), 9)
     }
   } else {
     setTimeout(() => {
