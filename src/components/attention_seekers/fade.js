@@ -27,7 +27,7 @@ function fade ({
   }
 
   return (
-    <div id={id} style={animation}>
+    <div id={id} style={animation} {...rest}>
       { rest.children }
     </div>
   )
