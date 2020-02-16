@@ -39,8 +39,9 @@ function flashKeyframe (state) {
   while (currentStep < 100) {
     if (currentStep === 0) {
       zeroOpacityFrame += '\n' + (currentStep + iterationStep).toString() + '%'
+    } else {
+      zeroOpacityFrame += ',\n' + (currentStep + iterationStep).toString() + '%'
     }
-    zeroOpacityFrame += ',\n' + (currentStep + iterationStep).toString() + '%'
     fullOpacityFrame += (currentStep + iterationStep).toString() + '%,\n'
     currentStep += iterationStep * 2
   }
