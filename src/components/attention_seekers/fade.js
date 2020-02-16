@@ -5,14 +5,14 @@ import fadeActions from '../../data/fade/fadeActions'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
 function fade ({
-  id, entry, animationDirection, opacityLimit,
+  id, entry, entryDirection, opacityLimit,
   duration, timing, delay, iterations, direction, fillMode, playState, ...rest
 }) {
   let animation
 
   if (!rest.fade.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
-    fadeActions.newFade(id, entry, direction, opacityLimit)
+    fadeActions.newFade(id, entry, entryDirection, opacityLimit)
   } else {
     animation = getAnimation(id, {}, document.getElementById(id).style)
     const fadeObj = rest.fade.state.get(id)
@@ -52,7 +52,7 @@ function fadeKeyframe (state) {
     endFrame += 'opacity: 0;\n'
   }
 
-  switch (state.get('direction')) {
+  switch (state.get('entryDirection')) {
     case 'down':
       originFrame += 'transform: translate3d(0, -100%, 0);\n' +
         '-webkit-transform: translate3d(0, -100%, 0);\n'
@@ -91,8 +91,8 @@ export function setEntry (value) {
   fadeActions.changeFadeValue(this.id, 'entry', value)
 }
 
-export function setFadeDirection (value) {
-  fadeActions.changeFadeValue(this.id, 'direction', value)
+export function setEntryDirection (value) {
+  fadeActions.changeFadeValue(this.id, 'entryDirection', value)
 }
 
 export function setOpacityLimit (value) {
@@ -103,7 +103,7 @@ fade.propTypes = {
   anim: PropTypes.object,
   id: PropTypes.string,
   entry: PropTypes.bool,
-  animationDirection: PropTypes.string,
+  entryDirection: PropTypes.string,
   opacityLimit: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   timing: PropTypes.string,

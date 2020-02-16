@@ -4,7 +4,7 @@ const fade = Immutable.Record({
   id: '',
   type: 'fade',
   entry: true,
-  direction: 'left',
+  entryDirection: 'left',
   opacityLimit: 100
 })
 

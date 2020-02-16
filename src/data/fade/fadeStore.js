@@ -21,7 +21,7 @@ class FadeStore extends ReduceStore {
           fade({
             id: action.id,
             entry: action.entry,
-            direction: action.direction,
+            entryDirection: action.entryDirection,
             opacityLimit: action.opacityLimit
           })
         )
