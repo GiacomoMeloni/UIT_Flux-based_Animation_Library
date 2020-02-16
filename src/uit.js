@@ -1,5 +1,8 @@
 import getAnimData from './viewInterface'
-import bounce, { setBounces, setLimit, setTransformOrigin } from './components/attention_seekers/bounce'
+import bounce, {
+  setBounces, setLimit, setTransformOrigin,
+  setEntry as setBounceEntry, setEntryDirection as setBounceEntryDirection
+} from './components/attention_seekers/bounce'
 import fade, {
   setEntry as setFadeEntry, setEntryDirection as setFadeEntryDirection, setOpacityLimit
 } from './components/attention_seekers/fade'
@@ -12,17 +15,23 @@ const uit = {
 }
 
 export function getBounce (id) {
-  return {
+  const retObject = {
     ...getAnimData('bounce', id, bounceObject),
     setBounces,
     setLimit,
     setTransformOrigin
   }
+  retObject.setEntry = setBounceEntry
+  retObject.setEntryDirection = setBounceEntryDirection
+
+  return retObject
 }
 
 export function getFade (id) {
   const retObject = {
     ...getAnimData('fade', id, fadeObject),
+    setFadeEntry,
+    setFadeEntryDirection,
     setOpacityLimit
   }
 

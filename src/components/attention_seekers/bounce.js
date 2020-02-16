@@ -12,11 +12,15 @@ function bounce ({
 
   if (!rest.bounce.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
-    bounceActions.newBounce(id, bounces, limit, transformOrigin, entry, entryDirection)
+    bounceActions.newBounce(
+      id, bounces, limit, transformOrigin, entry, entryDirection,
+      duration, timing, delay, iterations, direction, fillMode, playState
+    )
   } else {
-    // TODO: code to verify
-    animation = getAnimation(id, {}, document.getElementById(id).style)
     const bounceObj = rest.bounce.state.get(id)
+    // TODO: code to verify
+    animation = getAnimation(id, {}, bounceObj.style)
+    console.log(bounceObj)
 
     // only if entry is not set
     animation.transfromOrigin = !bounceObj.entry && bounceObj.transformOrigin
@@ -26,11 +30,11 @@ function bounce ({
     CSSHandlerActions.insertRule(id, rule)
 
     // test
-    animation.animationIterationCount = 'infinite'
+    // animation.animationIterationCount = 'infinite'
   }
 
   return (
-    <div id={id} style={animation}>
+    <div id={id} style={animation} {...rest}>
       { rest.children }
     </div>
   )
@@ -109,7 +113,6 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
 
               if (i !== '1') {
                 let shift = (limit - 1) * (multiplier) / (frames)
-                console.log(multiplier)
                 if (shift > 1 && i % 2 === 0) shift = 0.99
                 transform = i % 2 !== 0 ? 1 + shift : 1 - shift
                 multiplier -= 1
@@ -180,6 +183,14 @@ export function setLimit (value) {
 
 export function setTransformOrigin (value) {
   bounceActions.changeValue(this.id, 'transformOrigin', value)
+}
+
+export function setEntry (value) {
+  bounceActions.changeValue(this.id, 'entry', value)
+}
+
+export function setEntryDirection (value) {
+  bounceActions.changeValue(this.id, 'entryDirection', value)
 }
 
 bounce.propTypes = {
