@@ -12,7 +12,7 @@ function flash ({
 
   if (!rest.flash.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
-    flashActions.newFlash(id, flashingTimes)
+    flashActions.newFlash(id, flashingTimes, duration, timing, delay, iterations, direction, fillMode, playState)
   } else {
     animation = getAnimation(id, {}, document.getElementById(id).style)
     const flashObj = rest.flash.state.get(id)
