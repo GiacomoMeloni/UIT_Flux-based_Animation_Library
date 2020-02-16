@@ -20,7 +20,14 @@ class FlashStore extends ReduceStore {
           action.id,
           flash({
             id: action.id,
-            flashingTimes: action.flashingTimes
+            flashingTimes: action.flashingTimes,
+            duration: action.duration,
+            timing: action.timing,
+            delay: action.delay,
+            iterations: action.iterations,
+            direction: action.direction,
+            fillMode: action.fillMode,
+            playState: action.playState
           })
         )
 
