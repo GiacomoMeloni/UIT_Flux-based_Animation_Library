@@ -47,37 +47,37 @@ function actionsByType (type) {
 }
 
 function setDuration (value) {
-  actionsByType(this.type).changeValue(this.id, 'duration', value)
+  actionsByType(this.type).changeValue(this.id, 'style.duration', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationDuration', value)
 }
 
 function setTiming (value) {
-  actionsByType(this.type).changeValue(this.id, 'timing', value)
+  actionsByType(this.type).changeValue(this.id, 'style.timing', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationTimingFunction', value)
 }
 
 function setDelay (value) {
-  actionsByType(this.type).changeValue(this.id, 'delay', value)
+  actionsByType(this.type).changeValue(this.id, 'style.delay', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationDelay', value)
 }
 
 function setIterations (value) {
-  actionsByType(this.type).changeValue(this.id, 'iterations', value)
+  actionsByType(this.type).changeValue(this.id, 'style.iterations', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationIterationCount', value)
 }
 
 function setDirection (value) {
-  actionsByType(this.type).changeValue(this.id, 'direction', value)
+  actionsByType(this.type).changeValue(this.id, 'style.direction', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationDirection', value)
 }
 
 function setFillMode (value) {
-  actionsByType(this.type).changeValue(this.id, 'fillMode', value)
+  actionsByType(this.type).changeValue(this.id, 'style.fillMode', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationFillMode', value)
 }
 
 function setPlayState (value) {
-  actionsByType(this.type).changeValue(this.id, 'playState', value)
+  actionsByType(this.type).changeValue(this.id, 'style.playState', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationPlayState', value)
 }
 

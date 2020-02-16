@@ -8,13 +8,13 @@ function getAnimation (animationName, defaultValues, style) {
   const animation = {}
 
   if (style) {
-    animation.animationDuration = style.animationDuration
-    animation.animationTimingFunction = style.animationTimingFunction
-    animation.animationDelay = style.animationDelay
-    animation.animationIterationCount = style.animationIterationCount
-    animation.animationDirection = style.animationDirection
-    animation.animationFillMode = style.animationFillMode
-    animation.animationPlayState = style.animationFillMode
+    animation.animationDuration = style.duration
+    animation.animationTimingFunction = style.timing
+    animation.animationDelay = style.delay
+    animation.animationIterationCount = style.iterations
+    animation.animationDirection = style.direction
+    animation.animationFillMode = style.fillMode
+    animation.animationPlayState = style.playState
   } else {
     const { duration, timing, delay, iterations, direction, fillMode, playState } = defaultValues
     animation.animationDuration = duration || '1s'

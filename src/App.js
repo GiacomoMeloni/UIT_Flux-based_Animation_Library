@@ -5,6 +5,7 @@ import uit, { getFade, getBounce } from './uit'
 
 function App (props) {
   const fade01 = getFade('fade01')
+  const bounce2 = getBounce('bounce2')
 
   return (
     <div className="App">
@@ -17,7 +18,9 @@ function App (props) {
             { getFade('fade01').opacityLimit }
           </p>
         </uit.fade>
-        <uit.bounce entry={'in'} id="bounce2" bounces={8} limit={30} {...props}>
+        <uit.bounce entry={'in'} id="bounce2" bounces={8} limit={30} onClick={
+          () => { bounce2.setIterations('infinite') }} {...props}
+        >
           Ciao sono gustavo
         </uit.bounce>
         <a
