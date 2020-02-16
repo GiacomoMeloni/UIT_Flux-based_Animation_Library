@@ -17,7 +17,7 @@ function App (props) {
             { getFade('fade01').opacityLimit }
           </p>
         </uit.fade>
-        <uit.bounce id="bounce2" bounces={2} {...props}>
+        <uit.bounce entry={'in'} id="bounce2" bounces={8} limit={30} {...props}>
           Ciao sono gustavo
         </uit.bounce>
         <a
