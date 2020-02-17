@@ -46,7 +46,7 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
     case 'in':
       if (entryDirection) {
         bound = 100 - 40 - frames
-        linspace = Math.floor((100 - bound) / frames)
+        linspace = Math.floor((100 - bound) / (frames - 2))
       } else {
         linspace = Math.floor(100 / (frames - 1))
       }
@@ -72,7 +72,7 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
     }
   }
 
-  let originFrame = entry !== 'out' ? 'from,\n' : ''
+  let originFrame = 'from,\n'
   let transform = limit
   let multiplier
   let bounceFrame = ''
@@ -85,8 +85,8 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
           switch (i) {
             case '0':
               originFrame += bound + '%,\n'
-              bounceFrame += '0% {\n' +
-                '        opacity: 0;\n' +
+              bounceFrame += '\n\n0% {\n' +
+                '   opacity: 0;\n' +
                 transformDir(entryDirection, i, '5000px') +
                 '\n}'
               break
@@ -134,9 +134,53 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
                 transform = i % 2 !== 0 ? 1 + shift : 1 - shift
                 multiplier -= 1
               }
-              bounceFrame += `   transform: scale3d(${transform}, ${transform}, ${transform});\n}`
+              bounceFrame += transformDir('scale', i, transform)
             }
           }
+        }
+      }
+      break
+
+    case 'out':
+      multiplier = frames
+      for (const i in [...Array(frames).keys()]) {
+        if (entryDirection) {
+          transform = Math.floor(multiplier / (frames + 1) * limit)
+        } else {
+          let shift = (limit - 1) * (multiplier) / (frames + 1)
+          if (shift > 1 && i % 2 === 0) shift = 0.99
+          transform = i % 2 !== 0 ? 1 + shift : 1 - shift
+        }
+        if (i === (frames - 1).toString()) {
+          if (!entryDirection) {
+            bounceFrame += '\n\n' + bound + '% {\n' +
+              transformDir('scale', i, transform) +
+              '\n}'
+            bounceFrame += '\n\nto {\n' +
+              '   opacity: 0;\n' +
+              '   transform: scale3d(0.3, 0.3, 0.3);\n' +
+              '}'
+          } else {
+            originFrame += bound + '%,\n'
+            bounceFrame += '\n\n' + bound + '% {\n' +
+              transformDir(entryDirection, i, transform + 'px') +
+              '\n}'
+            bounceFrame += '\n\nto {\n' +
+              '   opacity: 0;\n' +
+              transformDir(entryDirection, frames, '5000px') +
+              '\n}'
+          }
+        } else {
+          originFrame += i === '0' ? '0%,\n' : linspace * i + '%,\n'
+          bounceFrame += '\n\n' + linspace * i + '% {\n'
+          if (i === '1') bounceFrame += '   opacity: 1;\n'
+          if (entryDirection) {
+            bounceFrame += transformDir(entryDirection, i, transform + 'px')
+          } else {
+            bounceFrame += transformDir('scale', i, transform)
+          }
+          bounceFrame += '\n}'
+          multiplier -= 1
         }
       }
       break
@@ -167,12 +211,10 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
       }
   }
 
-  if (entry !== 'out') {
-    originFrame += 'to {\n' +
-      '   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n'
-    if (!entry) originFrame += '   transform: translate3d(0, 0, 0);\n'
-    originFrame += '}'
-  }
+  originFrame += 'to {\n' +
+    '   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n'
+  if (!entry) originFrame += '   transform: translate3d(0, 0, 0);\n'
+  originFrame += '}'
 
   return originFrame + bounceFrame
 }
@@ -180,10 +222,10 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
 function transformDir (dir, i, value) {
   switch (dir) {
     case 'up':
-      if (i % 2 === 1) value = '-' + value
+      if (i % 2 === 0) value = '-' + value
       return `   transform: translate3d(0, ${value}, 0);`
     case 'down':
-      if (i % 2 === 0) value = '-' + value
+      if (i % 2 === 1) value = '-' + value
       return `   transform: translate3d(0, ${value}, 0);`
     case 'left':
       if (i % 2 === 0) value = '-' + value
@@ -191,6 +233,8 @@ function transformDir (dir, i, value) {
     case 'right':
       if (i % 2 === 1) value = '-' + value
       return `   transform: translate3d(${value}, 0, 0);`
+    case 'scale':
+      return `   transform: scale3d(${value}, ${value}, ${value}`
     default:
       throw Error(`${dir} can not be parsed as a direction`)
   }
