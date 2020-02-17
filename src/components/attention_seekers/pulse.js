@@ -18,7 +18,7 @@ function pulse ({
   } else {
     const pulseObj = rest.pulse.state.get(id)
     animation = getAnimation(id, {}, pulseObj.style)
-    console.log(pulseKeyframe(pulseObj))
+    console.log(pulseObj)
     CSSHandlerActions.insertRule(id, pulseKeyframe(pulseObj))
   }
 
@@ -47,7 +47,7 @@ export function setEnlargement (value) {
 
 pulse.propTypes = {
   id: PropTypes.string,
-  enlargement: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  enlargement: PropTypes.number,
   duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   timing: PropTypes.string,
   delay: PropTypes.string,

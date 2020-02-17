@@ -11,8 +11,9 @@ function App (props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.pulse id='pulse01' enlargement={ 10 } iterations={'infinite'}{...props}>
-          <p onClick={ () => pulse01.setEnlargement(50) }>
+        <uit.pulse id='pulse01' enlargement={ 10 } iterations={'infinite'} onClick={
+          () => { pulse01.setEnlargement(50) }} {...props}>
+          <p>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
             { pulse01.enlargement }

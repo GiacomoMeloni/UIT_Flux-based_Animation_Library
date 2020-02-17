@@ -5,6 +5,8 @@ import pulseStore from './data/pulse/pulseStore'
 import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
 import bounceActions from './data/bounce/bounceActions'
 import fadeActions from './data/fade/fadeActions'
+import flashActions from './data/flash/flashActions'
+import pulseActions from './data/pulse/pulseActions'
 
 function getAnimData (type, id, tempObject) {
   const state = objectByType(type)
@@ -46,6 +48,10 @@ function actionsByType (type) {
       return bounceActions
     case 'fade':
       return fadeActions
+    case 'flash':
+      return flashActions
+    case 'pulse':
+      return pulseActions
 
     default:
       throw TypeError(`"${type}" does not have actions defined in uit`)

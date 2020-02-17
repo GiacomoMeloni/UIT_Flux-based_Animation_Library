@@ -15,6 +15,7 @@ function getStores () {
     bounceStore,
     fadeStore,
     flashStore,
+    pulseStore,
     CSSHandlerStore
   ]
 }
