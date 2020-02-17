@@ -20,7 +20,6 @@ function bounce ({
     const bounceObj = rest.bounce.state.get(id)
     // TODO: code to verify
     animation = getAnimation(id, {}, bounceObj.style)
-    console.log(bounceObj)
 
     // only if entry is not set
     animation.transfromOrigin = !bounceObj.entry && bounceObj.transformOrigin
@@ -47,13 +46,13 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
     case 'in':
       if (entryDirection) {
         bound = 100 - 40 - frames
-        linspace = Math.floor(bound / frames)
+        linspace = Math.floor((100 - bound) / frames)
       } else {
         linspace = Math.floor(100 / (frames - 1))
       }
       break
     case 'out':
-      bound = 100 - 60 + frames
+      bound = 100 - 55 + frames
       linspace = Math.floor(bound / frames)
       break
     default:
@@ -83,15 +82,33 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
       multiplier = frames - 1
       for (const i in [...Array(frames).keys()]) {
         if (entryDirection) {
-          transform = Math.floor(multiplier / bounces * limit)
-          if (multiplier === 1 || multiplier === -1) transform /= 2
+          switch (i) {
+            case '0':
+              originFrame += bound + '%,\n'
+              bounceFrame += '0% {\n' +
+                '        opacity: 0;\n' +
+                transformDir(entryDirection, i, '5000px') +
+                '\n}'
+              break
+            case (frames - 1).toString():
+              bounceFrame += '\n\nto {\n' +
+                '   transform: translate3d(0, 0, 0);\n' +
+                '}'
+              break
+            default:
+              originFrame += (bound + linspace * i) + '%,\n'
+              bounceFrame += '\n\n' + (bound + linspace * (i - 1)) + '% {\n'
+              if (i === '1') {
+                bounceFrame += '   opacity: 1;\n'
+              } else {
+                transform = Math.floor(multiplier / frames * limit)
+                if (multiplier === 1) transform /= 2
+              }
+              bounceFrame += transformDir(entryDirection, i, transform + 'px')
+              bounceFrame += '\n}'
 
-          bounceFrame += '\n\n' + linspace * i + '% {\n' +
-            '   animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n' +
-            '   transform: translate3d(0, ' + -transform + 'px, 0);\n' +
-            '}'
-
-          multiplier = -Math.sign(multiplier) * (Math.abs(multiplier) - 1)
+              multiplier -= 1
+          }
         } else {
           switch (i) {
             case '0':
@@ -160,14 +177,20 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
   return originFrame + bounceFrame
 }
 
-function transformDir (dir, value) {
+function transformDir (dir, i, value) {
   switch (dir) {
     case 'up':
+      if (i % 2 === 1) value = '-' + value
+      return `   transform: translate3d(0, ${value}, 0);`
     case 'down':
-      return `transform: translate3d(0, ${value}, 0);`
+      if (i % 2 === 0) value = '-' + value
+      return `   transform: translate3d(0, ${value}, 0);`
     case 'left':
+      if (i % 2 === 0) value = '-' + value
+      return `   transform: translate3d(${value}, 0, 0);`
     case 'right':
-      return `transform: translate3d(${value}, 0, 0);`
+      if (i % 2 === 1) value = '-' + value
+      return `   transform: translate3d(${value}, 0, 0);`
     default:
       throw Error(`${dir} can not be parsed as a direction`)
   }
