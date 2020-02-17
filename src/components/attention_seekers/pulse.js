@@ -12,19 +12,18 @@ function pulse ({
 
   if (!rest.pulse.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
-    pulseActions.newPulse(id, enlargement, duration, timing, delay, iterations, direction, fillMode, playState)
+    pulseActions.newPulse(
+      id, enlargement,
+      duration, timing, delay, iterations, direction, fillMode, playState)
   } else {
-    animation = getAnimation(id, {}, document.getElementById(id).style)
     const pulseObj = rest.pulse.state.get(id)
+    animation = getAnimation(id, {}, pulseObj.style)
     console.log(pulseKeyframe(pulseObj))
     CSSHandlerActions.insertRule(id, pulseKeyframe(pulseObj))
-
-    // test
-    animation.animationIterationCount = 'infinite'
   }
 
   return (
-    <div id={id} style={animation}>
+    <div id={id} style={animation} {...rest}>
       { rest.children }
     </div>
   )
@@ -43,7 +42,7 @@ function pulseKeyframe (state) {
 }
 
 export function setEnlargement (value) {
-  pulseActions.changePulseValue(this.id, 'enlargement', value)
+  pulseActions.changeValue(this.id, 'enlargement', value)
 }
 
 pulse.propTypes = {

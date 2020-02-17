@@ -2,7 +2,9 @@ import animationDispatcher from '../animationDispatcher'
 import pulseActionTypes from './pulseActionTypes'
 
 const pulseActions = {
-  newPulse (id, enlargement, duration, timing, delay, iterations, direction, fillMode, playState) {
+  newPulse (
+    id, enlargement,
+    duration, timing, delay, iterations, direction, fillMode, playState) {
     animationDispatcher.dispatch({
       type: pulseActionTypes.NEW_PULSE,
       id: id,
@@ -16,7 +18,7 @@ const pulseActions = {
       playState: playState
     })
   },
-  changePulseValue (id, key, value) {
+  changeValue (id, key, value) {
     animationDispatcher.dispatch({
       type: pulseActionTypes.CHANGE_PULSE_VALUE,
       id: id,

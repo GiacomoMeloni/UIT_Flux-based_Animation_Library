@@ -4,8 +4,9 @@ const fade = Immutable.Record({
   id: '',
   type: 'fade',
   entry: true,
-  direction: 'left',
-  opacityLimit: 100
+  entryDirection: 'left',
+  opacityLimit: 100,
+  style: null
 })
 
 export default fade

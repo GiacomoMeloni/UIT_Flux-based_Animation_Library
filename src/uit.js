@@ -1,6 +1,11 @@
 import getAnimData from './viewInterface'
-import bounce, { setBounces, setTopLimit, setTransformOrigin } from './components/attention_seekers/bounce'
-import fade, { setEntry, setFadeDirection, setOpacityLimit } from './components/attention_seekers/fade'
+import bounce, {
+  setBounces, setLimit, setTransformOrigin,
+  setEntry as setBounceEntry, setEntryDirection as setBounceEntryDirection
+} from './components/attention_seekers/bounce'
+import fade, {
+  setEntry as setFadeEntry, setEntryDirection as setFadeEntryDirection, setOpacityLimit
+} from './components/attention_seekers/fade'
 import flash, { setFlashingTimes } from './components/attention_seekers/flash'
 import pulse, { setEnlargement } from './components/attention_seekers/pulse'
 import bounceObject from './data/bounce/bounceObject'
@@ -16,35 +21,48 @@ const uit = {
 }
 
 export function getBounce (id) {
-  return {
+  const retObject = {
     ...getAnimData('bounce', id, bounceObject),
     setBounces,
-    setTopLimit,
+    setLimit,
     setTransformOrigin
   }
+  retObject.setEntry = setBounceEntry
+  retObject.setEntryDirection = setBounceEntryDirection
+
+  return retObject
 }
 
 export function getFade (id) {
-  return {
+  const retObject = {
     ...getAnimData('fade', id, fadeObject),
-    setEntry,
-    setFadeDirection,
+    setFadeEntry,
+    setFadeEntryDirection,
     setOpacityLimit
   }
+
+  retObject.setEntry = setFadeEntry
+  retObject.setEntryDirection = setFadeEntryDirection
+
+  return retObject
 }
 
 export function getFlash (id) {
-  return {
+  const retObject = {
     ...getAnimData('flash', id, flashObject),
     setFlashingTimes
   }
+
+  return retObject
 }
 
 export function getPulse (id) {
-  return {
+  const retObject = {
     ...getAnimData('pulse', id, pulseObject),
     setEnlargement
   }
+
+  return retObject
 }
 
 export function getTada (id) {
