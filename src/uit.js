@@ -10,6 +10,7 @@ import flash, { setFlashingTimes } from './components/attention_seekers/flash'
 import pulse, { setEnlargement } from './components/attention_seekers/pulse'
 import shake, { setShakingTimes, setShakingStrength } from './components/attention_seekers/shake'
 import swing, { setAngulation, setSwingingTimes } from './components/attention_seekers/swing'
+import heartbeat, { setBeatTimes, setBeatStrength } from './components/attention_seekers/heartbeat'
 
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
@@ -17,6 +18,7 @@ import flashObject from './data/flash/flashObject'
 import pulseObject from './data/pulse/pulseObject'
 import shakeObject from './data/shake/shakeObject'
 import swingObject from './data/swing/swingObject'
+import heartbeatObject from './data/heartbeat/heartbeatObject'
 
 const uit = {
   bounce: bounce,
@@ -24,7 +26,8 @@ const uit = {
   flash: flash,
   pulse: pulse,
   shake: shake,
-  swing: swing
+  swing: swing,
+  heartbeat: heartbeat
 }
 
 export function getBounce (id) {
@@ -87,6 +90,16 @@ export function getSwing (id) {
     ...getAnimData('swing', id, swingObject),
     setAngulation,
     setSwingingTimes
+  }
+
+  return retObject
+}
+
+export function getHeartbeat (id) {
+  const retObject = {
+    ...getAnimData('heartbeat', id, heartbeatObject),
+    setBeatTimes,
+    setBeatStrength
   }
 
   return retObject

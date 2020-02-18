@@ -6,6 +6,7 @@ import flashStore from '../data/flash/flashStore'
 import pulseStore from '../data/pulse/pulseStore'
 import shakeStore from '../data/shake/shakeStore'
 import swingStore from '../data/swing/swingStore'
+import heartbeatStore from '../data/heartbeat/heartbeatStore'
 
 import CSSHandlerActions from '../data/CSSHandler/CSSHandlerActions'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
@@ -20,6 +21,7 @@ function getStores () {
     pulseStore,
     shakeStore,
     swingStore,
+    heartbeatStore,
     CSSHandlerStore
   ]
 }
@@ -43,6 +45,9 @@ function getState () {
     },
     swing: {
       state: swingStore.getState()
+    },
+    heartbeat: {
+      state: heartbeatStore.getState()
     },
     cssHandler: {
       state: CSSHandlerStore.getState(),
