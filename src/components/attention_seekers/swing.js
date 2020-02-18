@@ -5,7 +5,7 @@ import swingActions from '../../data/swing/swingActions'
 import CSSHandlerActions from '../../data/CSSHandler/CSSHandlerActions'
 
 function swing ({
-  id, angulation,
+  id, angulation, swingingTimes,
   duration, timing, delay, iterations, direction, fillMode, playState, ...rest
 }) {
   let animation
@@ -13,10 +13,10 @@ function swing ({
   if (!rest.swing.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
     swingActions.newSwing(
-      id, angulation,
+      id, angulation, swingingTimes,
       duration, timing, delay, iterations, direction, fillMode, playState)
   } else {
-    const swingObj = rest.flash.state.get(id)
+    const swingObj = rest.swing.state.get(id)
     animation = getAnimation(id, {}, swingObj.style)
     console.log(swingKeyframe(swingObj))
     CSSHandlerActions.insertRule(id, swingKeyframe(swingObj))
@@ -30,34 +30,61 @@ function swing ({
 }
 
 function swingKeyframe (state) {
-  const iterationStep = (100 / state.get('flashingTimes')) / 2
-  let currentStep = 0
-  let fullOpacityFrame = '@keyframes ' + state.get('id') + ' {\nfrom, \n'
-  let zeroOpacityFrame = ''
+  let angulationStep = state.get('angulation') / (state.get('swingingTimes') * 2)
+  angulationStep = angulationStep.toFixed(2)
+  let iterationStep = (100 / state.get('swingingTimes')) / 2
+  iterationStep = iterationStep.toFixed(2)
+  let currentAngulation = (Number(state.get('angulation')) + Number(angulationStep))
+  let currentStep = Number(0)
 
-  while (currentStep < 100) {
-    if (currentStep === 0) {
-      zeroOpacityFrame += '\n' + (currentStep + iterationStep).toString() + '%'
+  let rule = '@keyframes ' + state.get('id') + ' {\n'
+  // '\nfrom {\n' +
+  // '-webkit-transform: rotate3d(0, 0, 1, 0deg);\n' +
+  // 'transform: rotate3d(0, 0, 1, 0deg);\n}\n\n'
+
+  let toTheRight = true
+
+  while (Number(currentStep) < 100) {
+    // console.log('angolazione')
+    // console.log(currentAngulation)
+    // console.log('passo')
+    // console.log(angulationStep)
+    // console.log('currentStep')
+    // console.log(currentStep)
+    if (toTheRight) {
+      rule += currentStep + '% {\n' +
+        '-webkit-transform: rotate3d(0, 0, 1, ' + (currentAngulation - angulationStep) + 'deg);\n' +
+        'transform: rotate3d(0, 0, 1, ' + (currentAngulation - angulationStep) + 'deg);\n}\n\n'
+      currentAngulation -= angulationStep
     } else {
-      zeroOpacityFrame += ',\n' + (currentStep + iterationStep).toString() + '%'
+      rule += currentStep + '% {\n' +
+        '-webkit-transform: rotate3d(0, 0, 1, -' + (currentAngulation - angulationStep) + 'deg);\n' +
+        'transform: rotate3d(0, 0, 1, -' + (currentAngulation - angulationStep) + 'deg);\n}\n\n'
+      currentAngulation -= angulationStep
     }
-    fullOpacityFrame += (currentStep + iterationStep).toString() + '%,\n'
-    currentStep += iterationStep * 2
+    currentStep = Number(currentStep) + Number(iterationStep)
+    toTheRight = !toTheRight
   }
 
-  fullOpacityFrame += 'to { opacity: 1; }\n'
-  zeroOpacityFrame += ' { opacity: 0; }\n}\n'
+  rule += 'to {\n' +
+    '-webkit-transform: rotate3d(0, 0, 1, 0deg);\n' +
+    'transform: rotate3d(0, 0, 1, 0deg);\n}\n'
 
-  return fullOpacityFrame + zeroOpacityFrame
+  return rule
 }
 
 export function setAngulation (value) {
   swingActions.changeValue(this.id, 'angulation', value)
 }
 
+export function setSwingingTimes (value) {
+  swingActions.changeValue(this.id, 'swingingTimes', value)
+}
+
 swing.propTypes = {
   id: PropTypes.string,
   angulation: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  swingingTimes: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   timing: PropTypes.string,
   delay: PropTypes.string,

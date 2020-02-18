@@ -9,7 +9,7 @@ import fade, {
 import flash, { setFlashingTimes } from './components/attention_seekers/flash'
 import pulse, { setEnlargement } from './components/attention_seekers/pulse'
 import shake, { setShakingTimes, setShakingStrength } from './components/attention_seekers/shake'
-import swing, { setAngulation } from './components/attention_seekers/swing'
+import swing, { setAngulation, setSwingingTimes } from './components/attention_seekers/swing'
 
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
@@ -85,7 +85,8 @@ export function getShake (id) {
 export function getSwing (id) {
   const retObject = {
     ...getAnimData('swing', id, swingObject),
-    setAngulation
+    setAngulation,
+    setSwingingTimes
   }
 
   return retObject

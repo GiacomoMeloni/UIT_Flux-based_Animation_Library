@@ -1,24 +1,24 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import uit, { getShake, getBounce } from './uit'
+import uit, { getSwing, getBounce } from './uit'
 
 function App (props) {
-  const shake0101 = getShake('shake0101')
+  const swing0101 = getSwing('swing0101')
   const bounce2 = getBounce('bounce2')
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.shake id='shake0101' shakingTimes={ 3 } shakingStrength={ 15 } iterations = {'infinite'} onClick={
-          () => { shake0101.setShakingStrength(75) }} {...props}>
+        <uit.swing id='swing0101' angulation = { 15 } swingingTimes = { 2 } iterations = {'infinite'} onClick={
+          () => { swing0101.setAngulation(20) }} {...props}>
           <p>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
-            { shake0101.shakingTimes }
+            { swing0101.angulation }
           </p>
-        </uit.shake>
+        </uit.swing>
         <uit.bounce entry={'in'} id="bounce2" bounces={2} limit={2} onClick={
           () => { bounce2.setIterations('infinite') }} {...props}
         >

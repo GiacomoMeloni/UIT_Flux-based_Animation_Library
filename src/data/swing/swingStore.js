@@ -22,6 +22,7 @@ class SwingStore extends ReduceStore {
           swing({
             id: action.id,
             angulation: action.angulation,
+            swingingTimes: action.swingingTimes,
             style: style({
               duration: action.duration,
               timing: action.timing,
