@@ -1,7 +1,7 @@
 import animationDispatcher from '../animationDispatcher'
 import CSSHandlerActionTypes from './CSSHandlerActionTypes'
 
-var documentLoaded = false
+let documentLoaded = false
 
 const CSSHandlerActions = {
   insertRule (id, rule) {

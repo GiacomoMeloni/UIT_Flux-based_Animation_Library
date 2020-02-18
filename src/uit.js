@@ -1,29 +1,22 @@
 import getAnimData from './viewInterface'
 import bounce, {
-  setBounces, setLimit, setTransformOrigin,
-  setEntry as setBounceEntry, setEntryDirection as setBounceEntryDirection
+  setBounces,
+  setEntry as setBounceEntry,
+  setEntryDirection as setBounceEntryDirection,
+  setLimit,
+  setTransformOrigin
 } from './components/attention_seekers/bounce'
 import fade, {
-  setEntry as setFadeEntry, setEntryDirection as setFadeEntryDirection, setOpacityLimit
+  setEntry as setFadeEntry,
+  setEntryDirection as setFadeEntryDirection,
+  setOpacityLimit
 } from './components/attention_seekers/fade'
-import flash, {
-  setFlashingTimes
-} from './components/attention_seekers/flash'
-import pulse, {
-  setEnlargement
-} from './components/attention_seekers/pulse'
-import shake, {
-  setShakingTimes, setShakingStrength
-} from './components/attention_seekers/shake'
-import swing, {
-  setAngulation, setSwingingTimes
-} from './components/attention_seekers/swing'
-import rubberBand, {
-  setStretches, setMaxOffset
-} from './components/attention_seekers/rubberBand'
-import tada, {
-  setMaxScale, setMinScale, setRotation
-} from './components/attention_seekers/tada'
+import flash, { setFlashingTimes } from './components/attention_seekers/flash'
+import pulse, { setEnlargement } from './components/attention_seekers/pulse'
+import shake, { setShakingStrength, setShakingTimes } from './components/attention_seekers/shake'
+import swing, { setAngulation, setSwingingTimes } from './components/attention_seekers/swing'
+import rubberBand, { setMaxOffset, setStretches } from './components/attention_seekers/rubberBand'
+import tada, { setMaxScale, setMinScale, setRotation } from './components/attention_seekers/tada'
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
 import flashObject from './data/flash/flashObject'
@@ -72,41 +65,33 @@ export function getFade (id) {
 }
 
 export function getFlash (id) {
-  const retObject = {
+  return {
     ...getAnimData('flash', id, flashObject),
     setFlashingTimes
   }
-
-  return retObject
 }
 
 export function getPulse (id) {
-  const retObject = {
+  return {
     ...getAnimData('pulse', id, pulseObject),
     setEnlargement
   }
-
-  return retObject
 }
 
 export function getShake (id) {
-  const retObject = {
+  return {
     ...getAnimData('shake', id, shakeObject),
     setShakingTimes,
     setShakingStrength
   }
-
-  return retObject
 }
 
 export function getSwing (id) {
-  const retObject = {
+  return {
     ...getAnimData('swing', id, swingObject),
     setAngulation,
     setSwingingTimes
   }
-
-  return retObject
 }
 
 export function getRubberBand (id) {
