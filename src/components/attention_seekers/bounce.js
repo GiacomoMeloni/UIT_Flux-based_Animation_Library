@@ -45,14 +45,14 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
   switch (entry) {
     case 'in':
       if (entryDirection) {
-        bound = 100 - 40 - frames
-        linspace = Math.floor((100 - bound) / (frames - 2))
+        bound = Math.max(0, 100 - 40 - frames)
+        linspace = frames > 2 ? Math.floor((100 - bound) / (frames - 2)) : undefined
       } else {
         linspace = Math.floor(100 / (frames - 1))
       }
       break
     case 'out':
-      bound = 100 - 55 + frames
+      bound = Math.min(100, 100 - 55 + frames)
       linspace = Math.floor(bound / frames)
       break
     default:
@@ -75,7 +75,7 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
   let originFrame = 'from,\n'
   let transform = limit
   let multiplier
-  let bounceFrame = ''
+  let bodyFrame = ''
 
   switch (entry) {
     case 'in':
@@ -85,48 +85,49 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
           switch (i) {
             case '0':
               originFrame += bound + '%,\n'
-              bounceFrame += '\n\n0% {\n' +
+              bodyFrame += '\n\n0% {\n' +
                 '   opacity: 0;\n' +
                 transformDir(entryDirection, i, '5000px') +
                 '\n}'
               break
             case (frames - 1).toString():
-              bounceFrame += '\n\nto {\n' +
-                '   transform: translate3d(0, 0, 0);\n' +
+              bodyFrame += '\n\nto {\n'
+              if (i === '1') bodyFrame += '   opacity: 1;\n'
+              bodyFrame += '   transform: translate3d(0, 0, 0);\n' +
                 '}'
               break
             default:
               originFrame += (bound + linspace * i) + '%,\n'
-              bounceFrame += '\n\n' + (bound + linspace * (i - 1)) + '% {\n'
+              bodyFrame += '\n\n' + (bound + linspace * (i - 1)) + '% {\n'
               if (i === '1') {
-                bounceFrame += '   opacity: 1;\n'
+                bodyFrame += '   opacity: 1;\n'
               } else {
                 transform = Math.floor(multiplier / frames * limit)
                 if (multiplier === 1) transform /= 2
               }
-              bounceFrame += transformDir(entryDirection, i, transform + 'px')
-              bounceFrame += '\n}'
+              bodyFrame += transformDir(entryDirection, i, transform + 'px')
+              bodyFrame += '\n}'
 
               multiplier -= 1
           }
         } else {
           switch (i) {
             case '0':
-              bounceFrame += '\n\n0% {\n' +
+              bodyFrame += '\n\n0% {\n' +
                 '   opacity: 0;\n' +
                 '   transform: scale3d(0.3, 0.3, 0.3);\n' +
                 '}'
               break
             case (frames - 1).toString():
-              bounceFrame += '\n\nto {\n' +
+              bodyFrame += '\n\nto {\n' +
                 '   opacity: 1;\n' +
                 '   transform: scale3d(1, 1, 1);\n' +
                 '}'
               break
             default: {
               originFrame += linspace * i + '%,\n'
-              bounceFrame += '\n\n' + linspace * i + '% {\n'
-              if (i === (frames / 2).toString()) bounceFrame += '   opacity: 1;\n'
+              bodyFrame += '\n\n' + linspace * i + '% {\n'
+              if (i === (frames / 2).toString()) bodyFrame += '   opacity: 1;\n'
 
               if (i !== '1') {
                 let shift = (limit - 1) * (multiplier) / (frames)
@@ -134,7 +135,7 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
                 transform = i % 2 !== 0 ? 1 + shift : 1 - shift
                 multiplier -= 1
               }
-              bounceFrame += transformDir('scale', i, transform)
+              bodyFrame += transformDir('scale', i, transform)
             }
           }
         }
@@ -153,33 +154,33 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
         }
         if (i === (frames - 1).toString()) {
           if (!entryDirection) {
-            bounceFrame += '\n\n' + bound + '% {\n' +
+            bodyFrame += '\n\n' + bound + '% {\n' +
               transformDir('scale', i, transform) +
               '\n}'
-            bounceFrame += '\n\nto {\n' +
+            bodyFrame += '\n\nto {\n' +
               '   opacity: 0;\n' +
               '   transform: scale3d(0.3, 0.3, 0.3);\n' +
               '}'
           } else {
             originFrame += bound + '%,\n'
-            bounceFrame += '\n\n' + bound + '% {\n' +
+            bodyFrame += '\n\n' + bound + '% {\n' +
               transformDir(entryDirection, i, transform + 'px') +
               '\n}'
-            bounceFrame += '\n\nto {\n' +
+            bodyFrame += '\n\nto {\n' +
               '   opacity: 0;\n' +
               transformDir(entryDirection, frames, '5000px') +
               '\n}'
           }
         } else {
           originFrame += i === '0' ? '0%,\n' : linspace * i + '%,\n'
-          bounceFrame += '\n\n' + linspace * i + '% {\n'
-          if (i === '1') bounceFrame += '   opacity: 1;\n'
+          bodyFrame += '\n\n' + linspace * i + '% {\n'
+          if (i === '1') bodyFrame += '   opacity: 1;\n'
           if (entryDirection) {
-            bounceFrame += transformDir(entryDirection, i, transform + 'px')
+            bodyFrame += transformDir(entryDirection, i, transform + 'px')
           } else {
-            bounceFrame += transformDir('scale', i, transform)
+            bodyFrame += transformDir('scale', i, transform)
           }
-          bounceFrame += '\n}'
+          bodyFrame += '\n}'
           multiplier -= 1
         }
       }
@@ -195,14 +196,14 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
             transform = Math.floor(multiplier / bounces * limit)
             if (multiplier === 1) transform /= 2
 
-            bounceFrame += '\n\n' + linspace * i + '% {\n' +
+            bodyFrame += '\n\n' + linspace * i + '% {\n' +
               '   animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n' +
               '   transform: translate3d(0, ' + -transform + 'px, 0);\n' +
               '}'
 
             multiplier -= 1
           } else {
-            bounceFrame = '\n\n' + Math.floor(linspace * 1.5) + '% {\n' +
+            bodyFrame = '\n\n' + Math.floor(linspace * 1.5) + '% {\n' +
               '   animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n' +
               '   transform: translate3d(0, ' + -transform + 'px, 0);\n' +
               '}'
@@ -216,7 +217,7 @@ function bounceKeyframes ({ bounces, limit, entry, entryDirection }) {
   if (!entry) originFrame += '   transform: translate3d(0, 0, 0);\n'
   originFrame += '}'
 
-  return originFrame + bounceFrame
+  return originFrame + bodyFrame
 }
 
 function transformDir (dir, i, value) {
@@ -262,7 +263,6 @@ export function setEntryDirection (value) {
 
 bounce.propTypes = {
   id: PropTypes.string,
-  anim: PropTypes.object,
   transformOrigin: PropTypes.string,
   bounces: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   limit: PropTypes.number,
