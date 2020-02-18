@@ -1,6 +1,5 @@
 import animationDispatcher from '../animationDispatcher'
 import rubberBandActionTypes from './rubberBandActionTypes'
-import bounceActionTypes from '../bounce/bounceActionTypes'
 
 const rubberBandActions = {
   newRubberBand (id, stretches, maxOffset) {
@@ -13,7 +12,7 @@ const rubberBandActions = {
   },
   changeValue (id, key, value) {
     animationDispatcher.dispatch({
-      type: bounceActionTypes.CHANGE_BOUNCE_VALUE,
+      type: rubberBandActionTypes.CHANGE_RUBBER_BAND_VALUE,
       id: id,
       key: key,
       value: value
