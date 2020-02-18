@@ -8,16 +8,20 @@ import fade, {
 } from './components/attention_seekers/fade'
 import flash, { setFlashingTimes } from './components/attention_seekers/flash'
 import pulse, { setEnlargement } from './components/attention_seekers/pulse'
+import shake, { setShakingTimes, setShakingStrength } from './components/attention_seekers/shake'
+
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
 import flashObject from './data/flash/flashObject'
 import pulseObject from './data/pulse/pulseObject'
+import shakeObject from './data/shake/shakeObject'
 
 const uit = {
   bounce: bounce,
   fade: fade,
   flash: flash,
-  pulse: pulse
+  pulse: pulse,
+  shake: shake
 }
 
 export function getBounce (id) {
@@ -60,6 +64,16 @@ export function getPulse (id) {
   const retObject = {
     ...getAnimData('pulse', id, pulseObject),
     setEnlargement
+  }
+
+  return retObject
+}
+
+export function getShake (id) {
+  const retObject = {
+    ...getAnimData('shake', id, shakeObject),
+    setShakingTimes,
+    setShakingStrength
   }
 
   return retObject

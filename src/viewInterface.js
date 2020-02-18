@@ -2,11 +2,15 @@ import bounceStore from './data/bounce/bounceStore'
 import fadeStore from './data/fade/fadeStore'
 import flashStore from './data/flash/flashStore'
 import pulseStore from './data/pulse/pulseStore'
-import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
+import shakeStore from './data/shake/shakeStore'
+
 import bounceActions from './data/bounce/bounceActions'
 import fadeActions from './data/fade/fadeActions'
 import flashActions from './data/flash/flashActions'
 import pulseActions from './data/pulse/pulseActions'
+import shakeActions from './data/shake/shakeActions'
+
+import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
 
 function getAnimData (type, id, tempObject) {
   const state = objectByType(type)
@@ -36,6 +40,8 @@ function objectByType (type) {
       return flashStore.getState()
     case 'pulse':
       return pulseStore.getState()
+    case 'shake':
+      return shakeStore.getState()
 
     default:
       throw TypeError(`"${type}" is not an animation defined in uit`)
@@ -52,6 +58,8 @@ function actionsByType (type) {
       return flashActions
     case 'pulse':
       return pulseActions
+    case 'shake':
+      return shakeActions
 
     default:
       throw TypeError(`"${type}" does not have actions defined in uit`)

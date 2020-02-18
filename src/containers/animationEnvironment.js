@@ -4,6 +4,7 @@ import bounceStore from '../data/bounce/bounceStore'
 import fadeStore from '../data/fade/fadeStore'
 import flashStore from '../data/flash/flashStore'
 import pulseStore from '../data/pulse/pulseStore'
+import shakeStore from '../data/shake/shakeStore'
 
 import CSSHandlerActions from '../data/CSSHandler/CSSHandlerActions'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
@@ -16,6 +17,7 @@ function getStores () {
     fadeStore,
     flashStore,
     pulseStore,
+    shakeStore,
     CSSHandlerStore
   ]
 }
@@ -33,6 +35,9 @@ function getState () {
     },
     pulse: {
       state: pulseStore.getState()
+    },
+    shake: {
+      state: shakeStore.getState()
     },
     cssHandler: {
       state: CSSHandlerStore.getState(),

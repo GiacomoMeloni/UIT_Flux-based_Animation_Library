@@ -1,24 +1,24 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import uit, { getPulse, getBounce, getFlash } from './uit'
+import uit, { getShake, getBounce } from './uit'
 
 function App (props) {
-  const pulse01 = getPulse('pulse01')
+  const shake0101 = getShake('shake0101')
   const bounce2 = getBounce('bounce2')
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <uit.pulse id='pulse01' enlargement={ 10 } iterations={'infinite'} onClick={
-          () => { pulse01.setEnlargement(50) }} {...props}>
+        <uit.shake id='shake0101' shakingTimes={ 3 } shakingStrength={ 15 } iterations = {'infinite'} onClick={
+          () => { shake0101.setShakingStrength(75) }} {...props}>
           <p>
             Edit <code>src/App.js</code> and save to reload.
             <br/>
-            { pulse01.enlargement }
+            { shake0101.shakingTimes }
           </p>
-        </uit.pulse>
+        </uit.shake>
         <uit.bounce entry={'in'} id="bounce2" bounces={2} limit={2} onClick={
           () => { bounce2.setIterations('infinite') }} {...props}
         >
