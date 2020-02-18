@@ -23,6 +23,9 @@ function App (props) {
         >
           Ciao sono gustavo
         </uit.bounce>
+        <uit.rubberBand id="rubberBand1" stretches={4} maxOffset={25} {...props}>
+          Miiii sono RUBBER
+        </uit.rubberBand>
         <a
           className="App-link"
           href="https://reactjs.org"
