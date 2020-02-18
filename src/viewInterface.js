@@ -1,10 +1,12 @@
 import bounceStore from './data/bounce/bounceStore'
 import fadeStore from './data/fade/fadeStore'
 import rubberBandStore from './data/rubberBand/rubberBandStore'
+import tadaStore from './data/tada/tadaStore'
 import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
 import bounceActions from './data/bounce/bounceActions'
 import fadeActions from './data/fade/fadeActions'
 import rubberBandActions from './data/rubberBand/rubberBandActions'
+import tadaActions from './data/tada/tadaActions'
 
 function getAnimData (type, id, tempObject) {
   const state = objectByType(type)
@@ -32,6 +34,8 @@ function objectByType (type) {
       return fadeStore.getState()
     case 'rubberBand':
       return rubberBandStore.getState()
+    case 'tada':
+      return tadaStore.getState()
 
     default:
       throw TypeError(`"${type}" is not an animation defined in uit`)
@@ -46,6 +50,8 @@ function actionsByType (type) {
       return fadeActions
     case 'rubberBand':
       return rubberBandActions
+    case 'tada':
+      return tadaActions
 
     default:
       throw TypeError(`"${type}" does not have actions defined in uit`)

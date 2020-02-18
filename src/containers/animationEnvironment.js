@@ -3,6 +3,7 @@ import { Container } from 'flux/utils'
 import bounceStore from '../data/bounce/bounceStore'
 import fadeStore from '../data/fade/fadeStore'
 import rubberBandStore from '../data/rubberBand/rubberBandStore'
+import tadaStore from '../data/tada/tadaStore'
 import CSSHandlerActions from '../data/CSSHandler/CSSHandlerActions'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
 import '../test.css'
@@ -12,6 +13,7 @@ function getStores () {
     bounceStore,
     fadeStore,
     rubberBandStore,
+    tadaStore,
     CSSHandlerStore
   ]
 }
@@ -26,6 +28,9 @@ function getState () {
     },
     rubberBand: {
       state: rubberBandStore.getState()
+    },
+    tada: {
+      state: tadaStore.getState()
     },
     cssHandler: {
       state: CSSHandlerStore.getState(),

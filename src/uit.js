@@ -9,14 +9,19 @@ import fade, {
 import rubberBand, {
   setStretches, setMaxOffset
 } from './components/attention_seekers/rubberBand'
+import tada, {
+  setMaxScale, setMinScale, setRotation
+} from './components/attention_seekers/tada'
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
 import rubberBandObject from './data/rubberBand/rubberBandObject'
+import tadaObject from './data/tada/tadaObject'
 
 const uit = {
   bounce: bounce,
   fade: fade,
-  rubberBand: rubberBand
+  rubberBand: rubberBand,
+  tada: tada
 }
 
 export function getBounce (id) {
@@ -50,15 +55,20 @@ export function getShake (id) {
   return getAnimData('shake', id)
 }
 
-export function getTada (id) {
-  return getAnimData('tada', id)
-}
-
 export function getRubberBand (id) {
   return {
     ...getAnimData('rubberBand', id, rubberBandObject),
     setStretches,
     setMaxOffset
+  }
+}
+
+export function getTada (id) {
+  return {
+    ...getAnimData('tada', id, tadaObject),
+    setMaxScale,
+    setMinScale,
+    setRotation
   }
 }
 
