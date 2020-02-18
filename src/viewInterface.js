@@ -1,12 +1,21 @@
 import bounceStore from './data/bounce/bounceStore'
 import fadeStore from './data/fade/fadeStore'
+import flashStore from './data/flash/flashStore'
+import pulseStore from './data/pulse/pulseStore'
+import shakeStore from './data/shake/shakeStore'
+import swingStore from './data/swing/swingStore'
 import rubberBandStore from './data/rubberBand/rubberBandStore'
 import tadaStore from './data/tada/tadaStore'
-import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
+
 import bounceActions from './data/bounce/bounceActions'
 import fadeActions from './data/fade/fadeActions'
+import flashActions from './data/flash/flashActions'
+import pulseActions from './data/pulse/pulseActions'
+import shakeActions from './data/shake/shakeActions'
+import swingActions from './data/swing/swingActions'
 import rubberBandActions from './data/rubberBand/rubberBandActions'
 import tadaActions from './data/tada/tadaActions'
+import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
 
 function getAnimData (type, id, tempObject) {
   const state = objectByType(type)
@@ -32,6 +41,14 @@ function objectByType (type) {
       return bounceStore.getState()
     case 'fade':
       return fadeStore.getState()
+    case 'flash':
+      return flashStore.getState()
+    case 'pulse':
+      return pulseStore.getState()
+    case 'shake':
+      return shakeStore.getState()
+    case 'swing':
+      return swingStore.getState()
     case 'rubberBand':
       return rubberBandStore.getState()
     case 'tada':
@@ -48,6 +65,14 @@ function actionsByType (type) {
       return bounceActions
     case 'fade':
       return fadeActions
+    case 'flash':
+      return flashActions
+    case 'pulse':
+      return pulseActions
+    case 'shake':
+      return shakeActions
+    case 'swing':
+      return swingActions
     case 'rubberBand':
       return rubberBandActions
     case 'tada':

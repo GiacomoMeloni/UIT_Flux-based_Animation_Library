@@ -6,6 +6,18 @@ import bounce, {
 import fade, {
   setEntry as setFadeEntry, setEntryDirection as setFadeEntryDirection, setOpacityLimit
 } from './components/attention_seekers/fade'
+import flash, {
+  setFlashingTimes
+} from './components/attention_seekers/flash'
+import pulse, {
+  setEnlargement
+} from './components/attention_seekers/pulse'
+import shake, {
+  setShakingTimes, setShakingStrength
+} from './components/attention_seekers/shake'
+import swing, {
+  setAngulation, setSwingingTimes
+} from './components/attention_seekers/swing'
 import rubberBand, {
   setStretches, setMaxOffset
 } from './components/attention_seekers/rubberBand'
@@ -14,12 +26,20 @@ import tada, {
 } from './components/attention_seekers/tada'
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
+import flashObject from './data/flash/flashObject'
+import pulseObject from './data/pulse/pulseObject'
+import shakeObject from './data/shake/shakeObject'
+import swingObject from './data/swing/swingObject'
 import rubberBandObject from './data/rubberBand/rubberBandObject'
 import tadaObject from './data/tada/tadaObject'
 
 const uit = {
   bounce: bounce,
   fade: fade,
+  flash: flash,
+  pulse: pulse,
+  shake: shake,
+  swing: swing,
   rubberBand: rubberBand,
   tada: tada
 }
@@ -51,8 +71,42 @@ export function getFade (id) {
   return retObject
 }
 
+export function getFlash (id) {
+  const retObject = {
+    ...getAnimData('flash', id, flashObject),
+    setFlashingTimes
+  }
+
+  return retObject
+}
+
+export function getPulse (id) {
+  const retObject = {
+    ...getAnimData('pulse', id, pulseObject),
+    setEnlargement
+  }
+
+  return retObject
+}
+
 export function getShake (id) {
-  return getAnimData('shake', id)
+  const retObject = {
+    ...getAnimData('shake', id, shakeObject),
+    setShakingTimes,
+    setShakingStrength
+  }
+
+  return retObject
+}
+
+export function getSwing (id) {
+  const retObject = {
+    ...getAnimData('swing', id, swingObject),
+    setAngulation,
+    setSwingingTimes
+  }
+
+  return retObject
 }
 
 export function getRubberBand (id) {

@@ -25,7 +25,6 @@ function bounce ({
     animation.transfromOrigin = !bounceObj.entry && bounceObj.transformOrigin
 
     const rule = `@keyframes ${id} {\n${bounceKeyframes(bounceObj)}\n}`
-    console.log(rule)
     CSSHandlerActions.insertRule(id, rule)
 
     // test
