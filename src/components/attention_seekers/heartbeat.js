@@ -30,15 +30,35 @@ function heartbeat ({
 }
 
 function heartbeatKeyframe (state) {
-  const enlargement = (1 + (state.get('enlargement') / 100)).toString()
-  let rule = '@keyframes ' + state.get('id') + ' {\n'
+  let iterationStep = ((100 / state.get('beatTimes')) / 2)
+  iterationStep = iterationStep.toFixed(2)
 
-  rule += 'from {\n-webkit-transform: scale3d(1, 1, 1);\ntransform: scale3d(1, 1, 1);\n}\n\n'
-  rule += '50% {\n-webkit-transform: scale3d(' + enlargement + ', ' + enlargement + ', ' + enlargement + ');' +
-    '\ntransform: scale3d(' + enlargement + ', ' + enlargement + ', ' + enlargement + ');\n}\n\n'
-  rule += 'to {\n-webkit-transform: scale3d(1, 1, 1);\ntransform: scale3d(1, 1, 1);\n}\n}'
+  const beatCoefficient = (state.get('beatStrength') / 100)
 
-  return rule
+  let currentStep = Number(iterationStep).toFixed(2)
+
+  const startEndFrame = '@keyframes ' + state.get('id') + ' {\nfrom, \n' +
+    'to {\n-webkit-transform: scale(1);\n' +
+    'transform: scale(1);\n}\n\n'
+
+  let startingForward = true
+  let rule = ''
+
+  while ((Number(currentStep) + Number(iterationStep)) < 100) {
+    if (startingForward) {
+      rule += currentStep + '% {\n' +
+        '-webkit-transform: scale(' + (1 + Number(beatCoefficient)) + ');\n' +
+        'transform: scale(' + (1 + Number(beatCoefficient)) + ');\n}\n\n'
+    } else {
+      rule += currentStep + '% {\n' +
+      '-webkit-transform: scale(' + (1 - Number(beatCoefficient)) + ');\n' +
+      'transform: scale(' + (1 - Number(beatCoefficient)) + ');\n}\n\n'
+    }
+    startingForward = !startingForward
+    currentStep = (Number(currentStep) + Number(iterationStep)).toFixed(2)
+  }
+
+  return startEndFrame + rule
 }
 
 export function setBeatTimes (value) {
