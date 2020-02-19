@@ -1,22 +1,32 @@
 import getAnimData from './viewInterface'
 import bounce, {
-  setBounces,
-  setEntry as setBounceEntry,
-  setEntryDirection as setBounceEntryDirection,
-  setLimit,
-  setTransformOrigin
+  setBounces, setLimit, setTransformOrigin,
+  setEntry as setBounceEntry, setEntryDirection as setBounceEntryDirection
 } from './components/attention_seekers/bounce'
 import fade, {
-  setEntry as setFadeEntry,
-  setEntryDirection as setFadeEntryDirection,
-  setOpacityLimit
+  setEntry as setFadeEntry, setEntryDirection as setFadeEntryDirection, setOpacityLimit
 } from './components/attention_seekers/fade'
-import flash, { setFlashingTimes } from './components/attention_seekers/flash'
-import pulse, { setEnlargement } from './components/attention_seekers/pulse'
-import shake, { setShakingStrength, setShakingTimes } from './components/attention_seekers/shake'
-import swing, { setAngulation, setSwingingTimes } from './components/attention_seekers/swing'
-import rubberBand, { setMaxOffset, setStretches } from './components/attention_seekers/rubberBand'
-import tada, { setMaxScale, setMinScale, setRotation } from './components/attention_seekers/tada'
+import flash, {
+  setFlashingTimes
+} from './components/attention_seekers/flash'
+import pulse, {
+  setEnlargement
+} from './components/attention_seekers/pulse'
+import shake, {
+  setShakingTimes, setShakingStrength
+} from './components/attention_seekers/shake'
+import swing, {
+  setAngulation, setSwingingTimes
+} from './components/attention_seekers/swing'
+import rubberBand, {
+  setMaxOffset, setStretches
+} from './components/attention_seekers/rubberBand'
+import tada, {
+  setMaxScale, setMinScale, setRotation
+} from './components/attention_seekers/tada'
+import heartbeat, {
+  setBeatTimes, setBeatStrength
+} from './components/attention_seekers/heartbeat'
 import bounceObject from './data/bounce/bounceObject'
 import fadeObject from './data/fade/fadeObject'
 import flashObject from './data/flash/flashObject'
@@ -25,6 +35,7 @@ import shakeObject from './data/shake/shakeObject'
 import swingObject from './data/swing/swingObject'
 import rubberBandObject from './data/rubberBand/rubberBandObject'
 import tadaObject from './data/tada/tadaObject'
+import heartbeatObject from './data/heartbeat/heartbeatObject'
 
 const uit = {
   bounce: bounce,
@@ -34,7 +45,8 @@ const uit = {
   shake: shake,
   swing: swing,
   rubberBand: rubberBand,
-  tada: tada
+  tada: tada,
+  heartbeat: heartbeat
 }
 
 export function getBounce (id) {
@@ -99,6 +111,14 @@ export function getRubberBand (id) {
     ...getAnimData('rubberBand', id, rubberBandObject),
     setStretches,
     setMaxOffset
+  }
+}
+
+export function getHeartbeat (id) {
+  return {
+    ...getAnimData('heartbeat', id, heartbeatObject),
+    setBeatTimes,
+    setBeatStrength
   }
 }
 

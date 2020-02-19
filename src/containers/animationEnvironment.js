@@ -8,8 +8,9 @@ import shakeStore from '../data/shake/shakeStore'
 import swingStore from '../data/swing/swingStore'
 import rubberBandStore from '../data/rubberBand/rubberBandStore'
 import tadaStore from '../data/tada/tadaStore'
+import heartbeatStore from '../data/heartbeat/heartbeatStore'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
-import '../test.css'
+import '../uitAnimation.css'
 
 function getStores () {
   return [
@@ -21,6 +22,7 @@ function getStores () {
     swingStore,
     rubberBandStore,
     tadaStore,
+    heartbeatStore,
     CSSHandlerStore
   ]
 }
@@ -50,6 +52,9 @@ function getState () {
     },
     tada: {
       state: tadaStore.getState()
+    },
+    heartbeat: {
+      state: heartbeatStore.getState()
     }
   }
 }

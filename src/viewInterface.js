@@ -6,6 +6,7 @@ import shakeStore from './data/shake/shakeStore'
 import swingStore from './data/swing/swingStore'
 import rubberBandStore from './data/rubberBand/rubberBandStore'
 import tadaStore from './data/tada/tadaStore'
+import heartbeatStore from './data/heartbeat/heartbeatStore'
 
 import bounceActions from './data/bounce/bounceActions'
 import fadeActions from './data/fade/fadeActions'
@@ -15,6 +16,7 @@ import shakeActions from './data/shake/shakeActions'
 import swingActions from './data/swing/swingActions'
 import rubberBandActions from './data/rubberBand/rubberBandActions'
 import tadaActions from './data/tada/tadaActions'
+import heartbeatActions from './data/heartbeat/heartbeatActions'
 import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
 
 function getAnimData (type, id, tempObject) {
@@ -56,6 +58,8 @@ function objectByType (type) {
       return rubberBandStore.getState()
     case 'tada':
       return tadaStore.getState()
+    case 'heartbeat':
+      return heartbeatStore.getState()
 
     default:
       throw TypeError(`"${type}" is not an animation defined in uit`)
@@ -80,6 +84,8 @@ function actionsByType (type) {
       return rubberBandActions
     case 'tada':
       return tadaActions
+    case 'heartbeat':
+      return heartbeatActions
 
     default:
       throw TypeError(`"${type}" does not have actions defined in uit`)
