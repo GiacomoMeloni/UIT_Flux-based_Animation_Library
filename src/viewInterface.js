@@ -31,7 +31,9 @@ function getAnimData (type, id, tempObject) {
     replay
   }
   for (const prop in obj) {
-    ret[prop] = obj[prop]
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+      ret[prop] = obj[prop]
+    }
   }
   return ret
 }
