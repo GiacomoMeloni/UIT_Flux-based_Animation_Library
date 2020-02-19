@@ -27,7 +27,8 @@ function getAnimData (type, id, tempObject) {
     setIterations,
     setDirection,
     setFillMode,
-    setPlayState
+    setPlayState,
+    replay
   }
   for (const prop in obj) {
     ret[prop] = obj[prop]
@@ -116,6 +117,10 @@ function setFillMode (value) {
 function setPlayState (value) {
   actionsByType(this.type).changeValue(this.id, 'style.playState', value)
   CSSHandlerActions.updateStyleRule(this.id, 'animationPlayState', value)
+}
+
+function replay () {
+  CSSHandlerActions.replayAnimation(this.id)
 }
 
 export default getAnimData

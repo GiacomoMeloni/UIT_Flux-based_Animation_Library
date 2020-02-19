@@ -14,6 +14,12 @@ const CSSHandlerActions = {
       rule: rule,
       value: value
     })
+  },
+  replayAnimation (id) {
+    animationDispatcher.dispatch({
+      type: CSSHandlerActionTypes.REPLAY_ANIMATION,
+      id: id
+    })
   }
 }
 

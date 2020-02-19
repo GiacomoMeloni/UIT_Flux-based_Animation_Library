@@ -18,7 +18,7 @@ function shake ({
   } else {
     const shakeObj = rest.shake.state.get(id)
     animation = getAnimation(id, {}, shakeObj.style)
-    console.log(shakeKeyframe(shakeObj))
+
     CSSHandlerActions.insertRule(id, shakeKeyframe(shakeObj))
   }
 

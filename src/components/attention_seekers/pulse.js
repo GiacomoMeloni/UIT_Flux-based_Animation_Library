@@ -18,7 +18,7 @@ function pulse ({
   } else {
     const pulseObj = rest.pulse.state.get(id)
     animation = getAnimation(id, {}, pulseObj.style)
-    console.log(pulseObj)
+
     CSSHandlerActions.insertRule(id, pulseKeyframe(pulseObj))
   }
 

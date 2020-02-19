@@ -20,12 +20,7 @@ function tada ({
     const tadaObj = rest.tada.state.get(id)
     animation = getAnimation(id, {}, tadaObj.style)
 
-    const rule = `@keyframes ${id} {\n${tadaKeyFrames(tadaObj)}\n}`
-    console.log(rule)
-    CSSHandlerActions.insertRule(id, rule)
-
-    // test
-    // animation.animationIterationCount = 'infinite'
+    CSSHandlerActions.insertRule(id, `@keyframes ${id} {\n${tadaKeyFrames(tadaObj)}\n}`)
   }
 
   return (

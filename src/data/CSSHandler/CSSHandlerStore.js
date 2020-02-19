@@ -53,6 +53,15 @@ class CSSHandlerStore extends ReduceStore {
         document.getElementById(action.id).style[action.rule] = action.value
         return state
 
+      case CSSHandlerActionTypes.REPLAY_ANIMATION: {
+        const animation = document.getElementById(action.id)
+        animation.style.animationName = 'none'
+        setTimeout(function () {
+          animation.style.animationName = action.id
+        }, 10)
+        return state
+      }
+
       default:
         return state
     }

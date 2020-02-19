@@ -18,17 +18,12 @@ function bounce ({
     )
   } else {
     const bounceObj = rest.bounce.state.get(id)
-    // TODO: code to verify
     animation = getAnimation(id, {}, bounceObj.style)
 
     // only if entry is not set
     animation.transfromOrigin = !bounceObj.entry && bounceObj.transformOrigin
 
-    const rule = `@keyframes ${id} {\n${bounceKeyframes(bounceObj)}\n}`
-    CSSHandlerActions.insertRule(id, rule)
-
-    // test
-    // animation.animationIterationCount = 'infinite'
+    CSSHandlerActions.insertRule(id, `@keyframes ${id} {\n${bounceKeyframes(bounceObj)}\n}`)
   }
 
   return (

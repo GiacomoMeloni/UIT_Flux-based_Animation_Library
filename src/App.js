@@ -1,11 +1,12 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import uit, { getFade, getBounce } from './uit'
+import uit, { getFade, getBounce, getRubberBand } from './uit'
 
 function App (props) {
   const fade01 = getFade('fade01')
   const bounce2 = getBounce('bounce2')
+  const rubberBand1 = getRubberBand('rubberBand1')
 
   return (
     <div className="App">
@@ -23,7 +24,9 @@ function App (props) {
         >
           Ciao sono gustavo
         </uit.bounce>
-        <uit.rubberBand id="rubberBand1" stretches={4} maxOffset={25} {...props}>
+        <uit.rubberBand id="rubberBand1" stretches={4} maxOffset={25} {...props} onClick ={
+          () => { rubberBand1.replay() }
+        }>
           Miiii sono RUBBER
         </uit.rubberBand>
         <a

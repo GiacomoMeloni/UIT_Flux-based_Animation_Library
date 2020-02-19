@@ -17,13 +17,9 @@ function fade ({
       duration, timing, delay, iterations, direction, fillMode, playState)
   } else {
     const fadeObj = rest.fade.state.get(id)
-    console.log(fadeObj)
     animation = getAnimation(id, {}, fadeObj.style)
-    console.log(animation)
-    CSSHandlerActions.insertRule(id, fadeKeyframe(fadeObj))
 
-    // test
-    // animation.animationIterationCount = 'infinite'
+    CSSHandlerActions.insertRule(id, fadeKeyframe(fadeObj))
   }
 
   return (

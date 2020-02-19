@@ -18,7 +18,7 @@ function swing ({
   } else {
     const swingObj = rest.swing.state.get(id)
     animation = getAnimation(id, {}, swingObj.style)
-    console.log(swingKeyframe(swingObj))
+
     CSSHandlerActions.insertRule(id, swingKeyframe(swingObj))
   }
 

@@ -18,7 +18,7 @@ function flash ({
   } else {
     const flashObj = rest.flash.state.get(id)
     animation = getAnimation(id, {}, flashObj.style)
-    console.log(flashKeyframe(flashObj))
+
     CSSHandlerActions.insertRule(id, flashKeyframe(flashObj))
   }
 

@@ -10,23 +10,17 @@ function rubberBand ({
 }) {
   let animation
 
-  if (!rest.rubberBand.state.has(id)) {
+  if (!rest.rubberband.state.has(id)) {
     animation = getAnimation(id, { duration, timing, delay, iterations, direction, fillMode, playState })
     rubberBandActions.newRubberBand(
       id, stretches, maxOffset,
       duration, timing, delay, iterations, direction, fillMode, playState
     )
   } else {
-    const rubberBObj = rest.rubberBand.state.get(id)
-    // TODO: code to verify
+    const rubberBObj = rest.rubberband.state.get(id)
     animation = getAnimation(id, {}, rubberBObj.style)
 
-    const rule = `@keyframes ${id} {\n${rubberBandKeyFrames(rubberBObj)}\n}`
-    console.log(rule)
-    CSSHandlerActions.insertRule(id, rule)
-
-    // test
-    // animation.animationIterationCount = 'infinite'
+    CSSHandlerActions.insertRule(id, `@keyframes ${id} {\n${rubberBandKeyFrames(rubberBObj)}\n}`)
   }
 
   return (

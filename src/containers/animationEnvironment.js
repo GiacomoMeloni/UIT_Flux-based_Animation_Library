@@ -8,7 +8,6 @@ import shakeStore from '../data/shake/shakeStore'
 import swingStore from '../data/swing/swingStore'
 import rubberBandStore from '../data/rubberBand/rubberBandStore'
 import tadaStore from '../data/tada/tadaStore'
-import CSSHandlerActions from '../data/CSSHandler/CSSHandlerActions'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
 import '../test.css'
 
@@ -46,15 +45,11 @@ function getState () {
     swing: {
       state: swingStore.getState()
     },
-    rubberBand: {
+    rubberband: {
       state: rubberBandStore.getState()
     },
     tada: {
       state: tadaStore.getState()
-    },
-    cssHandler: {
-      state: CSSHandlerStore.getState(),
-      insertRule: CSSHandlerActions.insertRule
     }
   }
 }
