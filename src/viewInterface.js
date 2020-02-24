@@ -18,6 +18,7 @@ import rubberBandActions from './data/rubberBand/rubberBandActions'
 import tadaActions from './data/tada/tadaActions'
 import heartbeatActions from './data/heartbeat/heartbeatActions'
 import CSSHandlerActions from './data/CSSHandler/CSSHandlerActions'
+import CSSHandlerStore from './data/CSSHandler/CSSHandlerStore'
 
 function getAnimData (type, id, tempObject) {
   const state = objectByType(type)
@@ -30,7 +31,8 @@ function getAnimData (type, id, tempObject) {
     setDirection,
     setFillMode,
     setPlayState,
-    replay
+    replay,
+    getKeyframes
   }
   for (const prop in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, prop)) {
@@ -129,6 +131,11 @@ function setPlayState (value) {
 
 function replay () {
   CSSHandlerActions.replayAnimation(this.id)
+}
+
+function getKeyframes () {
+  const CSSHandlerS = CSSHandlerStore.getState()
+  if (CSSHandlerS.rules.has(this.id)) return CSSHandlerS.rules.get(this.id).rule
 }
 
 export default getAnimData

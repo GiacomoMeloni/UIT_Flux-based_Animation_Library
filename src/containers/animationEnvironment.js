@@ -10,7 +10,7 @@ import rubberBandStore from '../data/rubberBand/rubberBandStore'
 import tadaStore from '../data/tada/tadaStore'
 import heartbeatStore from '../data/heartbeat/heartbeatStore'
 import CSSHandlerStore from '../data/CSSHandler/CSSHandlerStore'
-import '../uitAnimation.css'
+import '../falAnimation.css'
 
 function getStores () {
   return [

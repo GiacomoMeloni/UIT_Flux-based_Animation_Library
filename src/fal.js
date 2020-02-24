@@ -37,7 +37,7 @@ import rubberBandObject from './data/rubberBand/rubberBandObject'
 import tadaObject from './data/tada/tadaObject'
 import heartbeatObject from './data/heartbeat/heartbeatObject'
 
-const uit = {
+const fal = {
   bounce: bounce,
   fade: fade,
   flash: flash,
@@ -131,4 +131,4 @@ export function getTada (id) {
   }
 }
 
-export default uit
+export default fal
