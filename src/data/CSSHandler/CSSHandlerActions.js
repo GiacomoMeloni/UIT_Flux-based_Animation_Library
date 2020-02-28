@@ -28,13 +28,15 @@ function sheetReady (id, rule) {
     if (document.readyState === 'complete') {
       documentLoaded = true
       for (const styleSheet of document.styleSheets) {
-        if (styleSheet.cssRules[0].name === 'uit_animation_library') {
-          animationDispatcher.dispatch({
-            type: CSSHandlerActionTypes.INSERT_RULE,
-            sheet: styleSheet,
-            rule: rule,
-            id: id
-          })
+        if (styleSheet.cssRules.length > 0 && 'name' in styleSheet.cssRules[0]) {
+          if (styleSheet.cssRules[0].name === 'fal_animation_library') {
+            animationDispatcher.dispatch({
+              type: CSSHandlerActionTypes.INSERT_RULE,
+              sheet: styleSheet,
+              rule: rule,
+              id: id
+            })
+          }
         }
       }
     } else {
