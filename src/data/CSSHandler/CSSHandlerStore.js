@@ -58,7 +58,7 @@ class CSSHandlerStore extends ReduceStore {
         animation.style.animationName = 'none'
         setTimeout(function () {
           animation.style.animationName = action.id
-        }, 10)
+        }, 100)
         return state
       }
 
