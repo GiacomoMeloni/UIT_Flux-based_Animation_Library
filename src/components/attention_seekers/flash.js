@@ -30,19 +30,20 @@ function flash ({
 }
 
 function flashKeyframe (state) {
-  const iterationStep = (100 / state.get('flashingTimes')) / 2
-  let currentStep = 0
+  const frames = state.get('flashingTimes') * 2
+  const iterationStep = 100 / frames
   let fullOpacityFrame = '@keyframes ' + state.get('id') + ' {\nfrom, \n'
   let zeroOpacityFrame = ''
 
-  while (currentStep < 100) {
-    if (currentStep === 0) {
-      zeroOpacityFrame += '\n' + (currentStep + iterationStep).toString() + '%'
-    } else {
-      zeroOpacityFrame += ',\n' + (currentStep + iterationStep).toString() + '%'
+  for (const i in [...Array(frames).keys()]) {
+    if (i !== '0') {
+      if (i % 2 === 0) {
+        fullOpacityFrame += (iterationStep * i).toString() + '%,\n'
+      } else {
+        zeroOpacityFrame += (iterationStep * i).toString() + '%'
+        i === (frames - 1).toString() ? zeroOpacityFrame += '\n' : zeroOpacityFrame += ',\n'
+      }
     }
-    fullOpacityFrame += (currentStep + iterationStep).toString() + '%,\n'
-    currentStep += iterationStep * 2
   }
 
   fullOpacityFrame += 'to { opacity: 1; }\n'

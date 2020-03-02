@@ -1,0 +1,9 @@
+#bounce, #fade, #flash, #pulse, #shake, #swing, #rubberBand, #heartbeat {
+    display: inline-grid;
+}
+
+div > p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 14pt;
+}
