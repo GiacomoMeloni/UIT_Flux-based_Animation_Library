@@ -264,7 +264,7 @@ bounce.propTypes = {
   transformOrigin: PropTypes.string,
   bounces: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   limit: PropTypes.number,
-  entry: PropTypes.oneOf(['in', 'out']),
+  entry: PropTypes.oneOf([null, 'in', 'out']),
   entryDirection: PropTypes.oneOf(['left', 'right', 'up', 'down']),
   duration: PropTypes.string,
   timing: PropTypes.string,

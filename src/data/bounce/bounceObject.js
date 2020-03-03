@@ -6,7 +6,7 @@ const bounce = Immutable.Record({
   bounces: 3,
   limit: null,
   transformOrigin: 'center bottom',
-  entry: false,
+  entry: null,
   entryDirection: null,
   style: null
 })
