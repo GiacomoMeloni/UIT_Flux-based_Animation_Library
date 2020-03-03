@@ -21,7 +21,7 @@ function bounce ({
     animation = getAnimation(id, {}, bounceObj.style)
 
     // only if entry is not set
-    animation.transfromOrigin = !bounceObj.entry && bounceObj.transformOrigin
+    if (!bounceObj.entry) animation.transformOrigin = bounceObj.transformOrigin
 
     CSSHandlerActions.insertRule(id, `@keyframes ${id} {\n${bounceKeyframes(bounceObj)}\n}`)
   }
@@ -244,7 +244,11 @@ export function setLimit (value) {
 }
 
 export function setTransformOrigin (value) {
-  bounceActions.changeValue(this.id, 'transformOrigin', value)
+  if (!this.entry) {
+    bounceActions.changeValue(this.id, 'transformOrigin', value)
+  } else {
+    console.warn('Cannot set transform origin in entry mode')
+  }
 }
 
 export function setEntry (value) {
