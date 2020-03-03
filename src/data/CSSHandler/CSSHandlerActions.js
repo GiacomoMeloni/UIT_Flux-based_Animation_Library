@@ -28,7 +28,8 @@ function sheetReady (id, rule) {
     if (document.readyState === 'complete') {
       documentLoaded = true
       for (const styleSheet of document.styleSheets) {
-        if (styleSheet.cssRules.length > 0 && 'name' in styleSheet.cssRules[0]) {
+        if (styleSheet.cssRules.length > 0 &&
+        Object.hasOwnProperty.call(Object.getPrototypeOf(styleSheet.cssRules[0]), 'name')) {
           if (styleSheet.cssRules[0].name === 'fal_animation_library') {
             animationDispatcher.dispatch({
               type: CSSHandlerActionTypes.INSERT_RULE,
