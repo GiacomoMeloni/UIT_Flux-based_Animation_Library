@@ -8,6 +8,6 @@ div > p {
     font-size: 14pt;
 }
 
-td {
-
+.inputField {
+    margin-left: 5px;
 }

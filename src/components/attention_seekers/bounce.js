@@ -229,7 +229,7 @@ function transformDir (dir, i, value) {
       if (i % 2 === 1) value = '-' + value
       return `   transform: translate3d(${value}, 0, 0);`
     case 'scale':
-      return `   transform: scale3d(${value}, ${value}, ${value}`
+      return `   transform: scale3d(${value}, ${value}, ${value});`
     default:
       throw Error(`${dir} can not be parsed as a direction`)
   }
