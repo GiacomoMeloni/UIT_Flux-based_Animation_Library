@@ -50,9 +50,10 @@ function heartbeatKeyframe (state) {
         '-webkit-transform: scale(' + (1 + Number(beatCoefficient)) + ');\n' +
         'transform: scale(' + (1 + Number(beatCoefficient)) + ');\n}\n\n'
     } else {
+      const value = beatCoefficient > 1 ? 1 : beatCoefficient
       rule += currentStep + '% {\n' +
-      '-webkit-transform: scale(' + (1 - Number(beatCoefficient)) + ');\n' +
-      'transform: scale(' + (1 - Number(beatCoefficient)) + ');\n}\n\n'
+      '-webkit-transform: scale(' + (1 - value) + ');\n' +
+      'transform: scale(' + (1 - value) + ');\n}\n\n'
     }
     startingForward = !startingForward
     currentStep = (Number(currentStep) + Number(iterationStep)).toFixed(2)

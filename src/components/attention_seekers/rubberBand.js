@@ -47,10 +47,12 @@ function rubberBandKeyFrames ({ stretches, maxOffset }) {
         '}'
     } else {
       let shift
+      let negShift
       if (i === '0') {
         shift = maxOffset * 0.01
+        negShift = shift > 1 ? 1 : shift
         bodyFrame += '\n\n' + lowerBound + '% {\n' +
-          '   transform: scale3d(' + (1 + shift) + ', ' + (1 - shift) + ', 1);\n' +
+          '   transform: scale3d(' + (1 + shift) + ', ' + (1 - negShift) + ', 1);\n' +
           '}'
       } else {
         if (i === (frames - 2).toString()) {
@@ -59,8 +61,13 @@ function rubberBandKeyFrames ({ stretches, maxOffset }) {
           bodyFrame += '\n\n' + (lowerBound + linspace * i) + '% {\n'
         }
         shift = (maxOffset * (frames - i) / frames) * 0.01
-        if (i % 2 === 1) shift = -shift
-        bodyFrame += '   transform: scale3d(' + (1 + shift) + ', ' + (1 - shift) + ', 1);\n' +
+        if (i % 2 === 1) {
+          shift = -shift
+          shift = shift < -1 ? -1 : shift
+          negShift = shift
+        }
+        negShift = shift > 1 ? 1 : shift
+        bodyFrame += '   transform: scale3d(' + (1 + shift) + ', ' + (1 - negShift) + ', 1);\n' +
           '}'
       }
     }

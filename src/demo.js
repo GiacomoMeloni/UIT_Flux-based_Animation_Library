@@ -106,8 +106,13 @@ function DemoDataFields (props) {
   // eslint-disable-next-line no-unused-vars
   const [_selectState, _setSelectState] = useState(null)
 
+  let marginTop
+  if (Object.hasOwnProperty.call(animProps[id], selectState)) {
+    marginTop = animProps[id][selectState] === 'boolean' ? '28px' : '20px'
+  }
+
   return (
-    <div style={props.style}>
+    <div style={{ marginTop: marginTop }}>
       <FormControl>
         <InputLabel htmlFor="grouped-select">Properties</InputLabel>
         <Select
@@ -191,6 +196,7 @@ function ParseInputField (props) {
       <Checkbox
         color="default"
         inputProps={{ 'aria-label': 'checkbox with default color' }}
+        style={{ marginTop: '8px' }}
         checked={data[value]}
         onChange={(e) => {
           data['set' + capitalizeFirstLetter(value)](e.target.checked)
@@ -203,9 +209,7 @@ function ParseInputField (props) {
         id="outlined-number"
         label="Number"
         type="number"
-        min={source[value].number[0]}
-        max={source[value].number[1]}
-        step={source[value].number[2]}
+        inputProps={{ min: source[value].number[0], max: source[value].number[1], step: source[value].number[2] }}
         InputLabelProps={{ shrink: true }}
         variant="outlined"
         style={props.style}
@@ -252,98 +256,98 @@ function Demo (props) {
   const rows = [
     [
       <div key={shortid.generate()}>
-        <fal.bounce id="bounce"
-          onClick={() => { console.log(bounce.getKeyframes()); bounce.replay() }}
-          {...props}>
+        <fal.bounce id="bounce" {...props}>
           <p>Bounce</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.bounce>
+        <Button variant="contained" onClick={() => { bounce.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="bounce" style={{ marginTop: '20px' }} bounce={bounce}/>
+        <DemoDataFields id="bounce" bounce={bounce}/>
       </div>,
       <div key={shortid.generate()}>
-        <fal.fade id="fade" key={shortid.generate()}
-          onClick={() => { fade.replay() }}
-          {...props}>
+        <fal.fade id="fade" {...props}>
           <p>Fade</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.fade>
+        <Button variant="contained" onClick={() => { fade.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="fade" style={{ marginTop: '20px' }} fade={fade}/>
+        <DemoDataFields id="fade" fade={fade}/>
       </div>,
       <div key={shortid.generate()}>
-        <fal.flash id="flash" key={shortid.generate()}
-          onClick={() => { flash.replay() }}
-          {...props}>
+        <fal.flash id="flash" {...props}>
           <p>Flash</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.flash>
+        <Button variant="contained" onClick={() => { flash.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="flash" style={{ marginTop: '20px' }} flash={flash}/>
+        <DemoDataFields id="flash" flash={flash}/>
       </div>
     ],
     [
       <div key={shortid.generate()}>
-        <fal.pulse id="pulse" key={shortid.generate()}
-          onClick={() => { pulse.replay() }}
-          {...props}>
+        <fal.pulse id="pulse" {...props}>
           <p>Pulse</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.pulse>
+        <Button variant="contained" onClick={() => { pulse.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="pulse" style={{ marginTop: '20px' }} pulse={pulse}/>
+        <DemoDataFields id="pulse" pulse={pulse}/>
       </div>,
       <div key={shortid.generate()}>
-        <fal.shake id="shake" key={shortid.generate()}
-          onClick={() => { shake.replay() }}
-          {...props}>
+        <fal.shake id="shake" {...props}>
           <p>Shake</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.shake>
+        <Button variant="contained" onClick={() => { shake.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="shake" style={{ marginTop: '20px' }} shake={shake}/>
+        <DemoDataFields id="shake" shake={shake}/>
       </div>,
       <div key={shortid.generate()}>
-        <fal.swing id="swing" key={shortid.generate()}
-          onClick={() => { swing.replay() }}
-          {...props}>
+        <fal.swing id="swing" {...props}>
           <p>Swing</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.swing>
+        <Button variant="contained" onClick={() => { swing.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="swing" style={{ marginTop: '20px' }} swing={swing}/>
+        <DemoDataFields id="swing" swing={swing}/>
       </div>
     ],
     [
       <div key={shortid.generate()}>
-        <fal.rubberBand id="rubberBand" key={shortid.generate()}
-          onClick={() => { rubberBand.replay() }}
-          {...props}>
+        <fal.rubberBand id="rubberBand" {...props}>
           <p>RubberBand</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.rubberBand>
+        <Button variant="contained" onClick={() => { console.log(rubberBand.getKeyframes()); rubberBand.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="rubberBand" style={{ marginTop: '20px' }} rubberBand={rubberBand}/>
+        <DemoDataFields id="rubberBand" rubberBand={rubberBand}/>
       </div>,
       <div key={shortid.generate()}>
-        <fal.tada id="tada" key={shortid.generate()}
-          onClick={() => { tada.replay() }}
-          {...props}>
+        <fal.tada id="tada" {...props}>
           <p>Tada</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.tada>
+        <Button variant="contained" onClick={() => { tada.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="tada" style={{ marginTop: '20px' }} tada={tada}/>
+        <DemoDataFields id="tada" tada={tada}/>
       </div>,
       <div key={shortid.generate()}>
-        <fal.heartbeat id="heartbeat" key={shortid.generate()}
-          onClick={() => { heartbeat.replay() }}
-          {...props}>
+        <fal.heartbeat id="heartbeat" {...props}>
           <p>Heartbeat</p>
-          <Button variant="contained" color="primary" size="large">Animate Me</Button>
         </fal.heartbeat>
+        <Button variant="contained" onClick={() => { console.log(heartbeat.getKeyframes()); heartbeat.replay() }} color="primary" size="large">
+          Animate Me
+        </Button>
         <br/>
-        <DemoDataFields id="heartbeat" style={{ marginTop: '20px' }} heartbeat={heartbeat}/>
+        <DemoDataFields id="heartbeat" heartbeat={heartbeat}/>
       </div>
     ]
   ]
