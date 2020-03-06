@@ -164,7 +164,6 @@ function ParseInputField (props) {
         style={props.style}
         value={_string[id + value]}
         onChange={(e) => {
-          console.log(e.target.value)
           if (e.target.value !== '') _setString({ ..._string, [id + value]: e.target.value })
         }}
         onBlur={(e) => {
@@ -323,7 +322,7 @@ function Demo (props) {
         <fal.rubberBand id="rubberBand" {...props}>
           <p>RubberBand</p>
         </fal.rubberBand>
-        <Button variant="contained" onClick={() => { console.log(rubberBand.getKeyframes()); rubberBand.replay() }} color="primary" size="large">
+        <Button variant="contained" onClick={() => { rubberBand.replay() }} color="primary" size="large">
           Animate Me
         </Button>
         <br/>
@@ -343,7 +342,7 @@ function Demo (props) {
         <fal.heartbeat id="heartbeat" {...props}>
           <p>Heartbeat</p>
         </fal.heartbeat>
-        <Button variant="contained" onClick={() => { console.log(heartbeat.getKeyframes()); heartbeat.replay() }} color="primary" size="large">
+        <Button variant="contained" onClick={() => { heartbeat.replay() }} color="primary" size="large">
           Animate Me
         </Button>
         <br/>

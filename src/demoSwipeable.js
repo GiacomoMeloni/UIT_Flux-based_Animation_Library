@@ -13,7 +13,6 @@ import fal,
   getHeartbeat
 } from './fal'
 import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
 import shortid from 'shortid'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
@@ -25,7 +24,6 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import { InputAdornment } from '@material-ui/core'
 import Checkbox from '@material-ui/core/Checkbox'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import MobileStepper from '@material-ui/core/MobileStepper'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
@@ -165,7 +163,6 @@ function ParseInputField (props) {
         style={props.style}
         value={_string[id + value]}
         onChange={(e) => {
-          console.log(e.target.value)
           if (e.target.value !== '') _setString({ ..._string, [id + value]: e.target.value })
         }}
         onBlur={(e) => {
@@ -254,6 +251,7 @@ function Demo (props) {
   const tada = getTada('tada')
   const heartbeat = getHeartbeat('heartbeat')
 
+  const classes = useStyles()
   const theme = useTheme()
   const [activeStep, setActiveStep] = React.useState(0)
 
@@ -269,21 +267,8 @@ function Demo (props) {
     setActiveStep(step)
   }
 
-  const classes = {
-    root: {
-      maxWidth: 400,
-      flexGrow: 1
-    },
-    header: {
-      display: 'flex',
-      alignItems: 'center',
-      height: 50,
-      paddingLeft: '4px'
-    }
-  }
-
   const animations = [
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.bounce id="bounce" {...props}>
         <p>Bounce</p>
       </fal.bounce>
@@ -293,7 +278,7 @@ function Demo (props) {
       <br/>
       <DemoDataFields id="bounce" bounce={bounce}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.fade id="fade" {...props}>
         <p>Fade</p>
       </fal.fade>
@@ -303,7 +288,7 @@ function Demo (props) {
       <br/>
       <DemoDataFields id="fade" fade={fade}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.flash id="flash" {...props}>
         <p>Flash</p>
       </fal.flash>
@@ -313,7 +298,7 @@ function Demo (props) {
       <br/>
       <DemoDataFields id="flash" flash={flash}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.pulse id="pulse" {...props}>
         <p>Pulse</p>
       </fal.pulse>
@@ -323,7 +308,7 @@ function Demo (props) {
       <br/>
       <DemoDataFields id="pulse" pulse={pulse}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.shake id="shake" {...props}>
         <p>Shake</p>
       </fal.shake>
@@ -333,7 +318,7 @@ function Demo (props) {
       <br/>
       <DemoDataFields id="shake" shake={shake}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.swing id="swing" {...props}>
         <p>Swing</p>
       </fal.swing>
@@ -343,17 +328,17 @@ function Demo (props) {
       <br/>
       <DemoDataFields id="swing" swing={swing}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.rubberBand id="rubberBand" {...props}>
         <p>RubberBand</p>
       </fal.rubberBand>
-      <Button variant="contained" onClick={() => { console.log(rubberBand.getKeyframes()); rubberBand.replay() }} color="primary" size="large">
+      <Button variant="contained" onClick={() => { rubberBand.replay() }} color="primary" size="large">
         Animate Me
       </Button>
       <br/>
       <DemoDataFields id="rubberBand" rubberBand={rubberBand}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.tada id="tada" {...props}>
         <p>Tada</p>
       </fal.tada>
@@ -363,11 +348,11 @@ function Demo (props) {
       <br/>
       <DemoDataFields id="tada" tada={tada}/>
     </div>,
-    <div key={shortid.generate()}>
+    <div key={shortid.generate()} className={classes.content}>
       <fal.heartbeat id="heartbeat" {...props}>
         <p>Heartbeat</p>
       </fal.heartbeat>
-      <Button variant="contained" onClick={() => { console.log(heartbeat.getKeyframes()); heartbeat.replay() }} color="primary" size="large">
+      <Button variant="contained" onClick={() => { heartbeat.replay() }} color="primary" size="large">
         Animate Me
       </Button>
       <br/>
@@ -377,19 +362,15 @@ function Demo (props) {
 
   return (
     <div className={classes.root}>
-      <Paper square elevation={0} className={classes.header}>
-        <Typography>{animations[activeStep].label}</Typography>
-      </Paper>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
+        disableLazyLoading={true}
       >
-        {animations.map((anim, index) => (
-          Math.abs(activeStep - index) <= 2 ? (
-            anim
-          ) : null
+        {animations.map(anim => (
+          anim
         ))}
       </SwipeableViews>
       <MobileStepper
@@ -413,5 +394,31 @@ function Demo (props) {
     </div>
   )
 }
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    maxWidth: 400,
+    flexGrow: 1,
+    textAlign: 'center',
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    margin: '-334px 0 0 -200px'
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    height: 50,
+    paddingLeft: theme.spacing(4)
+  },
+  content: {
+    height: 180,
+    display: 'block',
+    maxWidth: 400,
+    overflow: 'hidden',
+    width: '100%',
+    paddingTop: 220
+  }
+}))
 
 export default Demo
