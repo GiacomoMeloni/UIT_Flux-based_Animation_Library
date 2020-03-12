@@ -108,6 +108,8 @@ function DemoDataFields (props) {
   let marginTop
   if (Object.hasOwnProperty.call(animProps[id], selectState)) {
     marginTop = animProps[id][selectState] === 'boolean' ? '28px' : '20px'
+  } else if (Object.hasOwnProperty.call(styleProps, selectState)) {
+    marginTop = '20px'
   }
 
   return (
